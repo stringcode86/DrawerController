@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		9F818F2A1F42EF1F00550E0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F291F42EF1F00550E0D /* AppDelegate.swift */; };
-		9F818F2C1F42EF1F00550E0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F2B1F42EF1F00550E0D /* ViewController.swift */; };
 		9F818F2F1F42EF1F00550E0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F818F2D1F42EF1F00550E0D /* Main.storyboard */; };
 		9F818F311F42EF1F00550E0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F818F301F42EF1F00550E0D /* Assets.xcassets */; };
 		9F818F341F42EF1F00550E0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F818F321F42EF1F00550E0D /* LaunchScreen.storyboard */; };
+		9F818F461F43012C00550E0D /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F451F43012C00550E0D /* DrawerController.swift */; };
+		9F818F551F43174100550E0D /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F541F43174100550E0D /* TestViewController.swift */; };
+		9F818F571F432D1200550E0D /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F561F432D1200550E0D /* DrawerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9F818F261F42EF1F00550E0D /* DrawerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F818F291F42EF1F00550E0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9F818F2B1F42EF1F00550E0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9F818F2E1F42EF1F00550E0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9F818F301F42EF1F00550E0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F818F331F42EF1F00550E0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F818F351F42EF1F00550E0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F818F451F43012C00550E0D /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
+		9F818F541F43174100550E0D /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		9F818F561F432D1200550E0D /* DrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				9F818F291F42EF1F00550E0D /* AppDelegate.swift */,
-				9F818F2B1F42EF1F00550E0D /* ViewController.swift */,
+				9F818F451F43012C00550E0D /* DrawerController.swift */,
+				9F818F541F43174100550E0D /* TestViewController.swift */,
+				9F818F561F432D1200550E0D /* DrawerViewController.swift */,
 				9F818F2D1F42EF1F00550E0D /* Main.storyboard */,
 				9F818F301F42EF1F00550E0D /* Assets.xcassets */,
 				9F818F321F42EF1F00550E0D /* LaunchScreen.storyboard */,
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F818F2C1F42EF1F00550E0D /* ViewController.swift in Sources */,
 				9F818F2A1F42EF1F00550E0D /* AppDelegate.swift in Sources */,
+				9F818F571F432D1200550E0D /* DrawerViewController.swift in Sources */,
+				9F818F551F43174100550E0D /* TestViewController.swift in Sources */,
+				9F818F461F43012C00550E0D /* DrawerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

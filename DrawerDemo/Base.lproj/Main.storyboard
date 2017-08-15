@@ -1,26 +1,267 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kst-Gb-Pj2">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Drawer Controller-->
+        <scene sceneID="38L-zy-d9T">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Kst-Gb-Pj2" customClass="DrawerController" customModule="DrawerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <containerView key="view" opaque="NO" contentMode="scaleToFill" id="rvS-aR-IJX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <connections>
+                            <segue destination="2RM-Fi-koS" kind="embed" id="t9m-Wn-5vx"/>
+                        </connections>
+                    </containerView>
+                    <connections>
+                        <segue destination="Ufl-jM-EhD" kind="custom" identifier="showDrawer" customClass="ShowInDrawer" customModule="DrawerDemo" customModuleProvider="target" id="Wye-Qt-3wI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5a7-ac-bYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2270" y="1743"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Wwp-5Z-NLb">
+            <objects>
+                <navigationController id="Ufl-jM-EhD" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="grA-Z2-crq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ZdC-9h-jfA" kind="relationship" relationship="rootViewController" id="9wM-cv-30H"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PJL-6o-wdI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1396" y="2516"/>
+        </scene>
+        <!--Drawer-->
+        <scene sceneID="cKH-0k-Owq">
+            <objects>
+                <viewController id="ZdC-9h-jfA" customClass="DrawerViewController" customModule="DrawerDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="Bck-iP-F5L"/>
+                        <viewControllerLayoutGuide type="bottom" id="7Dm-ca-w7D"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="kO8-w2-sYd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Drawer" id="vsH-Rv-njP">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="ceQ-xe-DoT">
+                            <connections>
+                                <action selector="hideDrawer:" destination="ZdC-9h-jfA" id="v9v-sV-Wka"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c24-tw-i5g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-615" y="2516"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="GlH-58-dgT">
+            <objects>
+                <viewController storyboardIdentifier="YellowViewController" id="0zf-Vi-MCG" customClass="TestViewController" customModule="DrawerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JLA-Z0-RSh"/>
+                        <viewControllerLayoutGuide type="bottom" id="zz3-yj-woh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Im-v0-oq0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wc7-su-Ads">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTe-vJ-u1r">
+                                        <rect key="frame" x="164.5" y="0.0" width="46" height="129.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="testOneAction:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="T7b-mm-s7y"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r1F-YJ-uXy">
+                                        <rect key="frame" x="164.5" y="129.5" width="46" height="129.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="testTwoAction:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="NOK-tG-Ypp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yke-D0-01A">
+                                        <rect key="frame" x="164.5" y="259" width="46" height="129"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="testThreeAction:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="t3U-FG-OXl"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QlK-Jj-Min">
+                                        <rect key="frame" x="164.5" y="388" width="46" height="129.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="showDebugAction:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="Xkw-GA-6rf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYx-zs-j7d">
+                                        <rect key="frame" x="164.5" y="517.5" width="46" height="129.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="showDrawer:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="RdO-ve-8Ef"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98039215690000003" green="0.87843137250000003" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="wc7-su-Ads" secondAttribute="trailing" id="1kG-IC-Z9L"/>
+                            <constraint firstItem="wc7-su-Ads" firstAttribute="leading" secondItem="3Im-v0-oq0" secondAttribute="leading" id="6sX-tW-Huz"/>
+                            <constraint firstItem="wc7-su-Ads" firstAttribute="top" secondItem="JLA-Z0-RSh" secondAttribute="bottom" id="dXd-sm-68n"/>
+                            <constraint firstItem="zz3-yj-woh" firstAttribute="top" secondItem="wc7-su-Ads" secondAttribute="bottom" id="p5Z-LT-DPX"/>
+                        </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WXg-th-Ybt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-614" y="1743"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="sY5-7o-prW">
+            <objects>
+                <viewController storyboardIdentifier="RedViewController" id="tpI-80-Abn" customClass="TestViewController" customModule="DrawerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pdy-No-wMf"/>
+                        <viewControllerLayoutGuide type="bottom" id="kRW-XK-fSQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="r8f-HE-NfE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8yJ-jT-hrf">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsL-Ep-a3V">
+                                        <rect key="frame" x="164.5" y="0.0" width="46" height="129.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="testOneAction:" destination="tpI-80-Abn" eventType="touchUpInside" id="MKV-FT-eLz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBz-se-FK2">
+                                        <rect key="frame" x="164.5" y="129.5" width="46" height="129.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="testTwoAction:" destination="tpI-80-Abn" eventType="touchUpInside" id="a65-nv-euk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amZ-DG-j3b">
+                                        <rect key="frame" x="164.5" y="259" width="46" height="129"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="testThreeAction:" destination="tpI-80-Abn" eventType="touchUpInside" id="SUZ-j0-ae0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeZ-2z-EUZ">
+                                        <rect key="frame" x="164.5" y="388" width="46" height="129.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="showDebugAction:" destination="tpI-80-Abn" eventType="touchUpInside" id="Z80-fv-kqo"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCV-0h-50S">
+                                        <rect key="frame" x="164.5" y="517.5" width="46" height="129.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="showDrawer:" destination="tpI-80-Abn" eventType="touchUpInside" id="y1n-BA-wkH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.16862745100000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="kRW-XK-fSQ" firstAttribute="top" secondItem="8yJ-jT-hrf" secondAttribute="bottom" id="1Yf-8g-DHj"/>
+                            <constraint firstAttribute="trailing" secondItem="8yJ-jT-hrf" secondAttribute="trailing" id="IFY-1i-G6l"/>
+                            <constraint firstItem="8yJ-jT-hrf" firstAttribute="leading" secondItem="r8f-HE-NfE" secondAttribute="leading" id="cam-Sa-qua"/>
+                            <constraint firstItem="8yJ-jT-hrf" firstAttribute="top" secondItem="pdy-No-wMf" secondAttribute="bottom" id="tlI-XH-qhr"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eYK-qj-yaL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="89" y="1743"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="99S-KS-LVY">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ggr-kQ-gIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="TestViewController" id="2RM-Fi-koS" customClass="TestViewController" customModule="DrawerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6WZ-IY-1VC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dWU-Qt-LuE">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6PO-AG-zo8">
+                                        <rect key="frame" x="144" y="0.0" width="87" height="133.5"/>
+                                        <state key="normal" title="Test action 1"/>
+                                        <connections>
+                                            <action selector="testOneAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="W8c-cJ-1gW"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEm-UJ-xi6">
+                                        <rect key="frame" x="143" y="133.5" width="89" height="133.5"/>
+                                        <state key="normal" title="Test action 2"/>
+                                        <connections>
+                                            <action selector="testTwoAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="UPK-RU-9zg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JW8-Ye-weU">
+                                        <rect key="frame" x="143" y="267" width="89" height="133"/>
+                                        <state key="normal" title="Test action 3"/>
+                                        <connections>
+                                            <action selector="testThreeAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="c1h-uh-6If"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igj-4G-evu">
+                                        <rect key="frame" x="144.5" y="400" width="86" height="133.5"/>
+                                        <state key="normal" title="Show debug"/>
+                                        <connections>
+                                            <action selector="showDebugAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="YMA-bU-OZf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZY-rb-qu1">
+                                        <rect key="frame" x="143" y="533.5" width="89" height="133.5"/>
+                                        <state key="normal" title="Show drawer"/>
+                                        <connections>
+                                            <action selector="showDrawer:" destination="2RM-Fi-koS" eventType="touchUpInside" id="K9h-ZR-tmo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="dWU-Qt-LuE" secondAttribute="bottom" id="PTK-ms-7AR"/>
+                            <constraint firstItem="dWU-Qt-LuE" firstAttribute="leading" secondItem="6WZ-IY-1VC" secondAttribute="leading" id="eJP-1n-wh4"/>
+                            <constraint firstAttribute="trailing" secondItem="dWU-Qt-LuE" secondAttribute="trailing" id="jnp-s0-yru"/>
+                            <constraint firstItem="dWU-Qt-LuE" firstAttribute="top" secondItem="6WZ-IY-1VC" secondAttribute="top" id="r4Y-Yn-lJC"/>
+                        </constraints>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-1396" y="1743"/>
         </scene>
     </scenes>
 </document>

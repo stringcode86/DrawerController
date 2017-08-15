@@ -12,6 +12,7 @@ class DrawerController: UIViewController {
     
     private(set) weak var master: UIViewController?
     private(set) weak var drawer: UIViewController?
+    private let drawerTransitioningDelegate = DrawerTransitioningDelegate()
     
     @IBAction func hideDrawerAction(_ sender: Any? ) {
         dismiss(animated: true, completion: nil)
@@ -39,6 +40,9 @@ class DrawerController: UIViewController {
     }
     
     override func showDrawerViewController(_ vc: UIViewController, sender: Any?) {
+        self.drawer?.dismiss(animated: true)
+        vc.modalPresentationStyle = .custom
+        vc.transitioningDelegate = drawerTransitioningDelegate
         present(vc, animated: true, completion: nil)
         drawer = vc
     }
@@ -98,7 +102,7 @@ extension UIViewController {
 }
 
 
-class ShowInDrawer: UIStoryboardSegue {
+class ShowInDrawerSegue: UIStoryboardSegue {
     
     override func perform() {
         source.showDrawerViewController(destination, sender: self)

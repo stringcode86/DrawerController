@@ -14,6 +14,8 @@
 		9F818F461F43012C00550E0D /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F451F43012C00550E0D /* DrawerController.swift */; };
 		9F818F551F43174100550E0D /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F541F43174100550E0D /* TestViewController.swift */; };
 		9F818F571F432D1200550E0D /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F561F432D1200550E0D /* DrawerViewController.swift */; };
+		9F818F591F43453B00550E0D /* DrawerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F581F43453B00550E0D /* DrawerPresentationController.swift */; };
+		9F818F5B1F43481300550E0D /* DrawerTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F5A1F43481300550E0D /* DrawerTransitioning.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		9F818F451F43012C00550E0D /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
 		9F818F541F43174100550E0D /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		9F818F561F432D1200550E0D /* DrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
+		9F818F581F43453B00550E0D /* DrawerPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerPresentationController.swift; sourceTree = "<group>"; };
+		9F818F5A1F43481300550E0D /* DrawerTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerTransitioning.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				9F818F291F42EF1F00550E0D /* AppDelegate.swift */,
-				9F818F451F43012C00550E0D /* DrawerController.swift */,
+				9F818F5E1F43486800550E0D /* DrawerController */,
 				9F818F541F43174100550E0D /* TestViewController.swift */,
 				9F818F561F432D1200550E0D /* DrawerViewController.swift */,
 				9F818F2D1F42EF1F00550E0D /* Main.storyboard */,
@@ -68,6 +72,16 @@
 				9F818F351F42EF1F00550E0D /* Info.plist */,
 			);
 			path = DrawerDemo;
+			sourceTree = "<group>";
+		};
+		9F818F5E1F43486800550E0D /* DrawerController */ = {
+			isa = PBXGroup;
+			children = (
+				9F818F451F43012C00550E0D /* DrawerController.swift */,
+				9F818F5A1F43481300550E0D /* DrawerTransitioning.swift */,
+				9F818F581F43453B00550E0D /* DrawerPresentationController.swift */,
+			);
+			name = DrawerController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,7 +159,9 @@
 			files = (
 				9F818F2A1F42EF1F00550E0D /* AppDelegate.swift in Sources */,
 				9F818F571F432D1200550E0D /* DrawerViewController.swift in Sources */,
+				9F818F591F43453B00550E0D /* DrawerPresentationController.swift in Sources */,
 				9F818F551F43174100550E0D /* TestViewController.swift in Sources */,
+				9F818F5B1F43481300550E0D /* DrawerTransitioning.swift in Sources */,
 				9F818F461F43012C00550E0D /* DrawerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +328,7 @@
 				9F818F3A1F42EF1F00550E0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -21,7 +21,7 @@
                         </connections>
                     </containerView>
                     <connections>
-                        <segue destination="Ufl-jM-EhD" kind="custom" identifier="showDrawer" customClass="ShowInDrawer" customModule="DrawerDemo" customModuleProvider="target" id="Wye-Qt-3wI"/>
+                        <segue destination="Ufl-jM-EhD" kind="custom" identifier="showDrawer" customClass="ShowInDrawerSegue" customModule="DrawerDemo" customModuleProvider="target" id="Mhw-OJ-Kee"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5a7-ac-bYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -204,8 +204,11 @@
         <!--Test View Controller-->
         <scene sceneID="99S-KS-LVY">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ggr-kQ-gIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="TestViewController" id="2RM-Fi-koS" customClass="TestViewController" customModule="DrawerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4mb-41-gEi"/>
+                        <viewControllerLayoutGuide type="bottom" id="mHF-8r-Odb"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6WZ-IY-1VC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -260,6 +263,7 @@
                         </constraints>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ggr-kQ-gIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1396" y="1743"/>
         </scene>

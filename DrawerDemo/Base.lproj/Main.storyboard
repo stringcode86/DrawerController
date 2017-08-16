@@ -55,7 +55,28 @@
                     <view key="view" contentMode="scaleToFill" id="kO8-w2-sYd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LcP-cZ-Dbw">
+                                <rect key="frame" x="1" y="349" width="373" height="317"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dpa-f2-vTd">
+                                <rect key="frame" x="164" y="318" width="47" height="30"/>
+                                <state key="normal" title="Toggle"/>
+                                <connections>
+                                    <action selector="toggleAction:" destination="ZdC-9h-jfA" eventType="touchUpInside" id="o6z-rC-ild"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dpa-f2-vTd" firstAttribute="centerX" secondItem="kO8-w2-sYd" secondAttribute="centerX" id="8AI-I7-zIa"/>
+                            <constraint firstItem="dpa-f2-vTd" firstAttribute="centerY" secondItem="kO8-w2-sYd" secondAttribute="centerY" id="ZD4-LQ-tlT"/>
+                            <constraint firstAttribute="trailing" secondItem="LcP-cZ-Dbw" secondAttribute="trailing" constant="1" id="hPH-E1-EfU"/>
+                            <constraint firstItem="LcP-cZ-Dbw" firstAttribute="leading" secondItem="kO8-w2-sYd" secondAttribute="leading" constant="1" id="il7-eD-rzx"/>
+                            <constraint firstItem="LcP-cZ-Dbw" firstAttribute="top" secondItem="dpa-f2-vTd" secondAttribute="bottom" constant="1" id="jWh-hX-M7m"/>
+                            <constraint firstItem="7Dm-ca-w7D" firstAttribute="top" secondItem="LcP-cZ-Dbw" secondAttribute="bottom" constant="1" id="pwR-Zf-7aq"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Drawer" id="vsH-Rv-njP">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="ceQ-xe-DoT">
@@ -63,11 +84,37 @@
                                 <action selector="hideDrawer:" destination="ZdC-9h-jfA" id="v9v-sV-Wka"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="Shh-NW-Z9r">
+                            <connections>
+                                <segue destination="tFh-CJ-MKq" kind="show" id="El2-HI-fMd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c24-tw-i5g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-615" y="2516"/>
+        </scene>
+        <!--Testing-->
+        <scene sceneID="Uvp-Bt-pkJ">
+            <objects>
+                <viewController id="tFh-CJ-MKq" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nUy-Rc-c2u"/>
+                        <viewControllerLayoutGuide type="bottom" id="JpM-SM-mBL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3mo-bd-NOM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.25882352939999997" green="0.82352941180000006" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Testing" id="XYC-MM-6hP">
+                        <barButtonItem key="rightBarButtonItem" title="Woow" id="M6b-Fy-l8S"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kwx-pK-aZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="89" y="2516"/>
         </scene>
         <!--Test View Controller-->
         <scene sceneID="GlH-58-dgT">

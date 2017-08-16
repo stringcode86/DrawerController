@@ -78,8 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				9F818F451F43012C00550E0D /* DrawerController.swift */,
-				9F818F5A1F43481300550E0D /* DrawerTransitioning.swift */,
 				9F818F581F43453B00550E0D /* DrawerPresentationController.swift */,
+				9F818F5A1F43481300550E0D /* DrawerTransitioning.swift */,
 			);
 			name = DrawerController;
 			sourceTree = "<group>";

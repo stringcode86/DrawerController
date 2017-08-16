@@ -14,6 +14,13 @@ class DrawerController: UIViewController {
     private(set) weak var drawer: UIViewController?
     private let drawerTransitioningDelegate = DrawerTransitioningDelegate()
     
+    var displayMode: DrawerPresentationControllerDisplayMode = .drawer {
+        didSet {
+            let vc = drawer?.presentationController as? DrawerPresentationController
+            vc?.displayMode = displayMode
+        }
+    }
+    
     @IBAction func hideDrawerAction(_ sender: Any? ) {
         dismiss(animated: true, completion: nil)
     }
@@ -65,6 +72,10 @@ class DrawerController: UIViewController {
         super.viewDidLayoutSubviews()
     }
     
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.dismiss(animated: flag, completion: completion)
+        displayMode = .drawer
+    }
 }
 
 extension UIViewController {

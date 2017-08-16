@@ -35,11 +35,9 @@ final class DrawerAnimator: NSObject {
         case bottom
     }
     
-    // MARK: - Properties
     let direction: PresentationDirection
     let isPresentation: Bool
     
-    // MARK: - Initializers
     init(direction: PresentationDirection, isPresentation: Bool) {
         self.direction = direction
         self.isPresentation = isPresentation
@@ -48,10 +46,11 @@ final class DrawerAnimator: NSObject {
 }
 
 // MARK: - UIViewControllerAnimatedTransitioning
+
 extension DrawerAnimator: UIViewControllerAnimatedTransitioning {
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.3
+        return 0.4
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -60,28 +59,31 @@ extension DrawerAnimator: UIViewControllerAnimatedTransitioning {
         if isPresentation {
             transitionContext.containerView.addSubview(controller.view)
         }
-        let presentedFrame = transitionContext.finalFrame(for: controller)
+        let presented = transitionContext.finalFrame(for: controller)
+        let dismissed = self.dismissedFrame(presentedFrame: presented, context: transitionContext)
+        let initialFrame = isPresentation ? dismissed : presented
+        let finalFrame = isPresentation ? presented : dismissed
+        let duration = transitionDuration(using: transitionContext)
+        controller.view.frame = initialFrame
+        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.6, options: [], animations: {
+            controller.view.frame = finalFrame
+        }) { finished in
+            transitionContext.completeTransition(finished)
+        }
+    }
+    
+    private func dismissedFrame(presentedFrame: CGRect, context: UIViewControllerContextTransitioning) -> CGRect {
         var dismissedFrame = presentedFrame
         switch direction {
         case .left:
             dismissedFrame.origin.x = -presentedFrame.width
         case .right:
-            dismissedFrame.origin.x = transitionContext.containerView.frame.size.width
+            dismissedFrame.origin.x = context.containerView.frame.width
         case .top:
             dismissedFrame.origin.y = -presentedFrame.height
         case .bottom:
-            dismissedFrame.origin.y = transitionContext.containerView.frame.size.height
+            dismissedFrame.origin.y = context.containerView.frame.height
         }
-        
-        let initialFrame = isPresentation ? dismissedFrame : presentedFrame
-        let finalFrame = isPresentation ? presentedFrame : dismissedFrame
-        
-        let animationDuration = transitionDuration(using: transitionContext)
-        controller.view.frame = initialFrame
-        UIView.animate(withDuration: animationDuration, animations: {
-            controller.view.frame = finalFrame
-        }) { finished in
-            transitionContext.completeTransition(finished)
-        }
+        return dismissedFrame
     }
 }

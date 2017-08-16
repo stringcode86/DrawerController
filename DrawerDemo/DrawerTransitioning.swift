@@ -9,6 +9,12 @@
 import UIKit
 
 
+/// This file contains standard custom iOS transitioning boiler plate madness.
+/// Intendet to be used by `DrawerController` only
+
+// MARK: - UIViewControllerTransitioningDelegate
+
+
 class DrawerTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
@@ -25,6 +31,7 @@ class DrawerTransitioningDelegate: NSObject, UIViewControllerTransitioningDelega
     }
 }
 
+// MARK: - DrawerAnimator
 
 final class DrawerAnimator: NSObject {
     

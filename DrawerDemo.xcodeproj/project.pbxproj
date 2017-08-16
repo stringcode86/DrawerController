@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F1C56C01F44785800FD85F2 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C56BF1F44785800FD85F2 /* GradientView.swift */; };
 		9F818F2A1F42EF1F00550E0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F291F42EF1F00550E0D /* AppDelegate.swift */; };
 		9F818F2F1F42EF1F00550E0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F818F2D1F42EF1F00550E0D /* Main.storyboard */; };
 		9F818F311F42EF1F00550E0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F818F301F42EF1F00550E0D /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F1C56BF1F44785800FD85F2 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		9F818F261F42EF1F00550E0D /* DrawerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F818F291F42EF1F00550E0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F818F2E1F42EF1F00550E0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				9F818F451F43012C00550E0D /* DrawerController.swift */,
 				9F818F581F43453B00550E0D /* DrawerPresentationController.swift */,
 				9F818F5A1F43481300550E0D /* DrawerTransitioning.swift */,
+				9F1C56BF1F44785800FD85F2 /* GradientView.swift */,
 			);
 			name = DrawerController;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 				9F818F571F432D1200550E0D /* DrawerViewController.swift in Sources */,
 				9F818F591F43453B00550E0D /* DrawerPresentationController.swift in Sources */,
 				9F818F551F43174100550E0D /* TestViewController.swift in Sources */,
+				9F1C56C01F44785800FD85F2 /* GradientView.swift in Sources */,
 				9F818F5B1F43481300550E0D /* DrawerTransitioning.swift in Sources */,
 				9F818F461F43012C00550E0D /* DrawerController.swift in Sources */,
 			);

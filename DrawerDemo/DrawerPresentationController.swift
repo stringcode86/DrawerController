@@ -13,11 +13,10 @@ enum DrawerPresentationControllerDisplayMode {
     case fullScreen
 }
 
+/// Presents viewcontroller as "drawer", adds show chrome
 class DrawerPresentationController: UIPresentationController {
-    private weak var gradientView: GradientView?
-    private var containerBounds: CGRect {
-        return containerView?.bounds ?? presentingViewController.view.bounds
-    }
+    
+    /// Animates contained view from and to `.fullScreen` `.drawer` mode.
     var displayMode: DrawerPresentationControllerDisplayMode = .drawer {
         didSet {
             if oldValue != displayMode {
@@ -26,12 +25,23 @@ class DrawerPresentationController: UIPresentationController {
         }
     }
     
+    /// `containerView` is optional for some reason. In case it is nil use 
+    /// presenting controllers bounds
+    private var containerBounds: CGRect {
+        return containerView?.bounds ?? presentingViewController.view.bounds
+    }
+    
+    /// Shadow chrome for drawer
+    private weak var gradientView: GradientView?
+    
+    // MARK: - Transitioning
+    
     override var frameOfPresentedViewInContainerView: CGRect {
         guard displayMode == .drawer else {
             return containerBounds
         }
         var frame = containerBounds
-        frame.origin.x = frame.width * 0.10
+        frame.origin.x = frame.width * 0.117
         frame.size.width -= frame.origin.x
         return frame
     }
@@ -72,13 +82,11 @@ class DrawerPresentationController: UIPresentationController {
         }, completion: nil)
     }
     
-    private class func concentratedShadowColors() -> [UIColor] {
-         return [UIColor.black.withAlphaComponent(0),
-                 UIColor.black.withAlphaComponent(0),
-                 UIColor.black.withAlphaComponent(0.25)]
-    }
+    // MARK: -
     
-    func updateLayout(for displayMode: DrawerPresentationControllerDisplayMode) {
+    /// Animates presented viewcontroller's view to frame for `displayMode`.
+    /// Tries to animate along`presentedViewController.transitionCoordinator`
+    private func updateLayout(for displayMode: DrawerPresentationControllerDisplayMode) {
         if let coordinator = presentedViewController.transitionCoordinator {
             coordinator.animate(alongsideTransition: { (context) in
                 self.presentedViewController.view.frame = self.frameOfPresentedViewInContainerView
@@ -88,49 +96,11 @@ class DrawerPresentationController: UIPresentationController {
             self.presentedViewController.view.frame = self.frameOfPresentedViewInContainerView
         }, completion: nil)
     }
+    
+    /// Colors for more concentrated gradient
+    private class func concentratedShadowColors() -> [UIColor] {
+        let colors = (0..<2).map { _ in UIColor.black.withAlphaComponent(0) }
+        return colors + [UIColor.black.withAlphaComponent(0.25)]
+    }
 
-}
-
-
-class GradientView: UIView {
-    
-    enum Direction {
-        case horizontal
-        case vertical
-        case custom(CGPoint, CGPoint)
-    }
-    
-    var colors: [UIColor] {
-        get {
-            let cgColors = (layer as? CAGradientLayer)?.colors as? [CGColor]
-            return cgColors?.flatMap { UIColor(cgColor: $0) } ?? []
-        }
-        set {
-            (layer as? CAGradientLayer)?.colors = newValue.map { $0.cgColor }
-        }
-    }
-    
-    var direction: Direction = .horizontal {
-        didSet {
-            switch direction {
-            case .horizontal:
-                (layer as? CAGradientLayer)?.startPoint = CGPoint(x: 0, y: 0.5)
-                (layer as? CAGradientLayer)?.endPoint = CGPoint(x: 1, y: 0.5)
-            case .vertical:
-                (layer as? CAGradientLayer)?.startPoint = CGPoint(x: 0, y: 0)
-                (layer as? CAGradientLayer)?.endPoint = CGPoint(x: 0, y: 1)
-            case .custom(let startPoint, let endPoint):
-                (layer as? CAGradientLayer)?.startPoint = startPoint
-                (layer as? CAGradientLayer)?.endPoint = endPoint
-            }
-        }
-    }
-    
-    override class var layerClass: AnyClass {
-        return CAGradientLayer.self
-    }
-    
-    class func defaultShadowColors() -> [UIColor] {
-        return [UIColor.black.withAlphaComponent(0), UIColor.black.withAlphaComponent(0.25)]
-    }
 }

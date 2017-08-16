@@ -44,7 +44,6 @@ class DrawerPresentationController: UIPresentationController {
         endFrame.size.width = frameOfPresentedViewInContainerView.origin.x
         // Update view hierarchy
         let gradientView = GradientView(frame: startFrame)
-        gradientView.backgroundColor = .red
         gradientView.alpha = 0
         gradientView.colors = DrawerPresentationController.concentratedShadowColors()
         gradientView.direction = .horizontal
@@ -80,28 +79,16 @@ class DrawerPresentationController: UIPresentationController {
     }
     
     func updateLayout(for displayMode: DrawerPresentationControllerDisplayMode) {
-//        if let coordinator = presentingViewController.transitionCoordinator {
-//            coordinator.animate(alongsideTransition: { (context) in
-//                self.presentedViewController.view.frame = self.frameOfPresentedViewInContainerView
-//                self.presentedViewController.view.setNeedsLayout()
-//            }, completion: nil)
-//            return
-//        }
-        
         if let coordinator = presentedViewController.transitionCoordinator {
             coordinator.animate(alongsideTransition: { (context) in
                 self.presentedViewController.view.frame = self.frameOfPresentedViewInContainerView
-                self.presentedViewController.view.layoutIfNeeded()
             }, completion: nil)
         }
-        
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.6, options: [], animations: {
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.6, options: [.allowAnimatedContent, .layoutSubviews], animations: {
             self.presentedViewController.view.frame = self.frameOfPresentedViewInContainerView
-            self.presentedViewController.view.layoutIfNeeded()
-        }) { finished in
-            ()
-        }
+        }, completion: nil)
     }
+
 }
 
 

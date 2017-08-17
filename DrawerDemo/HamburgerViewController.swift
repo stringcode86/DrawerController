@@ -43,4 +43,9 @@ class HamburgerViewController: UIViewController {
         hamburgerView2.animateToClose()
     }
     
+    @IBAction func animateToHamburgerAction(_ sender: Any) {
+        hamburgerView1.animateToClose(false)
+        hamburgerView2.animateToClose(false)
+    }
+    
 }

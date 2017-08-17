@@ -80,9 +80,14 @@
                         </constraints>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Item" id="KDa-OT-17m">
+                        <barButtonItem title="Close" id="KDa-OT-17m">
                             <connections>
                                 <action selector="animateAction:" destination="eG2-D4-x33" id="uN3-Wp-sCY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Hamburger" id="1Ye-Wa-H1Q">
+                            <connections>
+                                <action selector="animateToHamburgerAction:" destination="eG2-D4-x33" id="r5h-uU-bn4"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>

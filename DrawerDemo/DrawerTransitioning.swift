@@ -55,6 +55,9 @@ final class DrawerAnimator: UIPercentDrivenInteractiveTransition {
     let direction: PresentationDirection
     let isPresentation: Bool
     
+    /// Used for handeling of gesture reconizer (progress copuation)
+    fileprivate weak var latestContainerView: UIView?
+    
     init(direction: PresentationDirection, isPresentation: Bool) {
         self.direction = direction
         self.isPresentation = isPresentation
@@ -71,6 +74,7 @@ extension DrawerAnimator: UIViewControllerAnimatedTransitioning {
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        self.latestContainerView = transitionContext.containerView
         let key = isPresentation ? UITransitionContextViewControllerKey.to : UITransitionContextViewControllerKey.from
         let controller = transitionContext.viewController(forKey: key)!
         if isPresentation {
@@ -111,9 +115,15 @@ extension DrawerAnimator: UIViewControllerAnimatedTransitioning {
 extension DrawerAnimator {
 
     func handleDismissPan(_ recognizer: UIPanGestureRecognizer) {
-        guard let view = recognizer.view else {
+        // Trying to presist referect to container view form transition context
+        // animation. This should succeed every time. Otherwise fall back to
+        // gesture recognizer view
+        guard let view = latestContainerView ?? recognizer.view else {
             return
         }
+        // Dont want to be switing to the views as its transition is calculated
+        // based on them. So preserve the view that was set first
+        latestContainerView = view
         let translation = recognizer.translation(in: view)
         var progress = (translation.x / (view.bounds.width * 2))
         progress = min(max(progress, 0.0), 1.0)

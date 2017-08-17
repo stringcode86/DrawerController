@@ -81,14 +81,8 @@ class DrawerController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    private var interactionInProgress = false
-    private var shouldCompleteTransition = false
-    
-    private func setupDismissRecognizer() {
-        let pan = (drawer?.presentationController as? DrawerPresentationController)?.chromePanGestureRecognizer
-        pan?.addTarget(self, action: #selector(handleDismissPan(_:)))
-    }
-    
+    /// Set this as target of `UIPanGestureRecognizer` that should drive dismiss
+    /// interactive transitioning. Do not call dismiss, just add this as target.
     func handleDismissPan(_ recognizer: UIPanGestureRecognizer) {
         let transitioning = drawerTransitioningDelegate.interactiveTransitioning
         transitioning?.handleDismissPan(recognizer)
@@ -101,6 +95,11 @@ class DrawerController: UIViewController {
             drawerTransitioningDelegate.interactiveTransitioning = nil
         default: ()
         }
+    }
+    
+    private func setupDismissRecognizer() {
+        let pan = (drawer?.presentationController as? DrawerPresentationController)?.chromePanGestureRecognizer
+        pan?.addTarget(self, action: #selector(handleDismissPan(_:)))
     }
     
     override func targetViewController(forAction action: Selector, sender: Any?) -> UIViewController? {

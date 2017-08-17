@@ -70,13 +70,37 @@ class DrawerController: UIViewController {
         self.drawer?.dismiss(animated: true)
         vc.modalPresentationStyle = .custom
         vc.transitioningDelegate = drawerTransitioningDelegate
-        present(vc, animated: true, completion: nil)
+        present(vc, animated: true) { [weak self] in
+            self?.setupDismissRecognizer()
+        }
         drawer = vc
     }
     
     /// Dismissed `drawer`
     @IBAction func hideDrawerAction(_ sender: Any? ) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    private var interactionInProgress = false
+    private var shouldCompleteTransition = false
+    
+    private func setupDismissRecognizer() {
+        let pan = (drawer?.presentationController as? DrawerPresentationController)?.chromePanGestureRecognizer
+        pan?.addTarget(self, action: #selector(handleDismissPan(_:)))
+    }
+    
+    func handleDismissPan(_ recognizer: UIPanGestureRecognizer) {
+        let transitioning = drawerTransitioningDelegate.interactiveTransitioning
+        transitioning?.handleDismissPan(recognizer)
+        switch recognizer.state {
+        case .began:
+            let animator = DrawerAnimator(direction: .right, isPresentation: false)
+            drawerTransitioningDelegate.interactiveTransitioning = animator
+            dismiss(animated: true)
+        case .cancelled, .ended:
+            drawerTransitioningDelegate.interactiveTransitioning = nil
+        default: ()
+        }
     }
     
     override func targetViewController(forAction action: Selector, sender: Any?) -> UIViewController? {
@@ -88,7 +112,6 @@ class DrawerController: UIViewController {
     }
     
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-        self.drawer = nil
         super.dismiss(animated: flag, completion: completion)
         displayMode = .drawer
     }

@@ -17,6 +17,8 @@ import UIKit
 
 class DrawerTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
+    var interactiveTransitioning: DrawerAnimator?
+    
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return DrawerPresentationController(presentedViewController: presented, presenting: presenting)
     }
@@ -29,11 +31,19 @@ class DrawerTransitioningDelegate: NSObject, UIViewControllerTransitioningDelega
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return DrawerAnimator(direction: .right, isPresentation: false)
     }
+    
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactiveTransitioning
+    }
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactiveTransitioning
+    }
 }
 
 // MARK: - DrawerAnimator
 
-final class DrawerAnimator: NSObject {
+final class DrawerAnimator: UIPercentDrivenInteractiveTransition {
     
     enum PresentationDirection {
         case left
@@ -75,8 +85,9 @@ extension DrawerAnimator: UIViewControllerAnimatedTransitioning {
         UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.6, options: [], animations: {
             controller.view.frame = finalFrame
         }) { finished in
-            transitionContext.completeTransition(finished)
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
+        
     }
     
     private func dismissedFrame(presentedFrame: CGRect, context: UIViewControllerContextTransitioning) -> CGRect {
@@ -93,4 +104,33 @@ extension DrawerAnimator: UIViewControllerAnimatedTransitioning {
         }
         return dismissedFrame
     }
+}
+
+// MARK - UIViewControllerInteractiveTransitioning
+
+extension DrawerAnimator {
+
+    func handleDismissPan(_ recognizer: UIPanGestureRecognizer) {
+        guard let view = recognizer.view else {
+            return
+        }
+        let translation = recognizer.translation(in: view)
+        var progress = (translation.x / (view.bounds.width * 2))
+        progress = min(max(progress, 0.0), 1.0)
+        
+        switch recognizer.state {
+        case .changed:
+            update(progress)
+        case .cancelled:
+            cancel()
+        case .ended:
+            if progress < 0.15 {
+                cancel()
+            } else {
+                finish()
+            }
+        default: ()
+        }
+    }
+
 }

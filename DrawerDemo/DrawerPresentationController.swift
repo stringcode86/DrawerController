@@ -25,6 +25,8 @@ class DrawerPresentationController: UIPresentationController {
         }
     }
     
+    private(set) weak var chromePanGestureRecognizer: UIPanGestureRecognizer?
+    
     /// `containerView` is optional for some reason. In case it is nil use 
     /// presenting controllers bounds
     private var containerBounds: CGRect {
@@ -32,7 +34,7 @@ class DrawerPresentationController: UIPresentationController {
     }
     
     /// Shadow chrome for drawer
-    private weak var gradientView: GradientView?
+    private weak var gradientView: UIView? // GradientView?
     
     // MARK: - Transitioning
     
@@ -41,30 +43,51 @@ class DrawerPresentationController: UIPresentationController {
             return containerBounds
         }
         var frame = containerBounds
-        frame.origin.x = frame.width * 0.117
+        frame.origin.x = round(frame.width * 0.117)
         frame.size.width -= frame.origin.x
         return frame
     }
     
+    private var frameOfPresentedGradientViewInContainerView: CGRect {
+        var frame = containerBounds
+        frame.size.width = frameOfPresentedViewInContainerView.origin.x
+        return frame
+    }
+    
     override func presentationTransitionWillBegin() {
-        // Compute frames for `gradientView`
+        // Computer frames
         var startFrame = containerBounds
         startFrame.size.width = presentedViewController.view.frame.maxX
-        var endFrame = containerBounds
-        endFrame.size.width = frameOfPresentedViewInContainerView.origin.x
-        // Update view hierarchy
+        let endFrame = frameOfPresentedGradientViewInContainerView
+        //Create gradient view
         let gradientView = GradientView(frame: startFrame)
         gradientView.alpha = 0
         gradientView.colors = DrawerPresentationController.concentratedShadowColors()
         gradientView.direction = .horizontal
+        gradientView.translatesAutoresizingMaskIntoConstraints = false
         containerView?.addSubview(gradientView)
         self.gradientView = gradientView
+        // Add pangesture recognizer
+        let recognizer = UIPanGestureRecognizer()
+        gradientView.addGestureRecognizer(recognizer)
+        self.chromePanGestureRecognizer = recognizer
         // Animate
         presentingViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
             gradientView.alpha = 1
             gradientView.colors = GradientView.defaultShadowColors()
             gradientView.frame = endFrame
-        }, completion: nil)
+        }, completion: { finished in
+            if let presentedView = self.presentedView {
+                let views = ["gradientView": gradientView, "view": presentedView]
+                let visualLangH = "H:|-0-[gradientView]-0-[view]"
+                let constsH = NSLayoutConstraint.constraints(withVisualFormat: visualLangH, options: [], metrics: nil, views: views)
+                self.containerView?.addConstraints(constsH)
+                
+                let visualLangV = "V:|-0-[gradientView]-0-|"
+                let constsV = NSLayoutConstraint.constraints(withVisualFormat: visualLangV, options: [], metrics: nil, views: views)
+                self.containerView?.addConstraints(constsV)
+            }
+        })
     }
     
     override func presentationTransitionDidEnd(_ completed: Bool) {
@@ -75,10 +98,10 @@ class DrawerPresentationController: UIPresentationController {
     
     override func dismissalTransitionWillBegin() {
         let gradientView = self.gradientView
-        let endFrame = containerBounds
+        containerView?.setNeedsLayout()
         presentingViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
             gradientView?.alpha = 0
-            gradientView?.frame = endFrame
+            self.containerView?.layoutIfNeeded()
         }, completion: nil)
     }
     
@@ -87,13 +110,17 @@ class DrawerPresentationController: UIPresentationController {
     /// Animates presented viewcontroller's view to frame for `displayMode`.
     /// Tries to animate along`presentedViewController.transitionCoordinator`
     private func updateLayout(for displayMode: DrawerPresentationControllerDisplayMode) {
+        let viewFrame = frameOfPresentedViewInContainerView
+        let gradientFrame = frameOfPresentedGradientViewInContainerView
         if let coordinator = presentedViewController.transitionCoordinator {
             coordinator.animate(alongsideTransition: { (context) in
-                self.presentedViewController.view.frame = self.frameOfPresentedViewInContainerView
+                self.presentedView?.frame = viewFrame
+                self.gradientView?.frame = gradientFrame
             }, completion: nil)
         }
         UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.6, options: [.allowAnimatedContent, .layoutSubviews], animations: {
-            self.presentedViewController.view.frame = self.frameOfPresentedViewInContainerView
+            self.presentedView?.frame = viewFrame
+            self.gradientView?.frame = gradientFrame
         }, completion: nil)
     }
     
@@ -102,5 +129,4 @@ class DrawerPresentationController: UIPresentationController {
         let colors = (0..<2).map { _ in UIColor.black.withAlphaComponent(0) }
         return colors + [UIColor.black.withAlphaComponent(0.25)]
     }
-
 }

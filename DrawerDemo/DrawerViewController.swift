@@ -27,17 +27,14 @@ class DrawerViewController: UIViewController {
         drawerController?.displayMode = .drawer
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         drawerController?.displayMode = .fullScreen
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //drawerController?.displayMode = .fullScreen
+        drawerController?.displayMode = .fullScreen
     }
     
 }

@@ -101,12 +101,34 @@
                         <color key="backgroundColor" red="0.25882352939999997" green="0.82352941180000006" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Testing" id="XYC-MM-6hP">
-                        <barButtonItem key="rightBarButtonItem" title="Woow" id="M6b-Fy-l8S"/>
+                        <barButtonItem key="rightBarButtonItem" title="Woow" id="M6b-Fy-l8S">
+                            <connections>
+                                <segue destination="YqC-1s-hne" kind="show" id="g9X-rt-ZLi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kwx-pK-aZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="89" y="2516"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="bkA-kk-Dcn">
+            <objects>
+                <viewController id="YqC-1s-hne" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Aeb-OX-2Z2"/>
+                        <viewControllerLayoutGuide type="bottom" id="6LC-sX-3eh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9Pc-IA-fOc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M4c-9j-yCA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="802" y="2516"/>
         </scene>
         <!--Test View Controller-->
         <scene sceneID="GlH-58-dgT">

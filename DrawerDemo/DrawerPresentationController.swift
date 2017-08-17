@@ -77,16 +77,7 @@ class DrawerPresentationController: UIPresentationController {
             gradientView.colors = GradientView.defaultShadowColors()
             gradientView.frame = endFrame
         }, completion: { finished in
-            if let presentedView = self.presentedView {
-                let views = ["gradientView": gradientView, "view": presentedView]
-                let visualLangH = "H:|-0-[gradientView]-0-[view]"
-                let constsH = NSLayoutConstraint.constraints(withVisualFormat: visualLangH, options: [], metrics: nil, views: views)
-                self.containerView?.addConstraints(constsH)
-                
-                let visualLangV = "V:|-0-[gradientView]-0-|"
-                let constsV = NSLayoutConstraint.constraints(withVisualFormat: visualLangV, options: [], metrics: nil, views: views)
-                self.containerView?.addConstraints(constsV)
-            }
+            self.setupGradientViewConstraints()
         })
     }
     
@@ -122,6 +113,16 @@ class DrawerPresentationController: UIPresentationController {
             self.presentedView?.frame = viewFrame
             self.gradientView?.frame = gradientFrame
         }, completion: nil)
+    }
+    
+    private func setupGradientViewConstraints() {
+        guard let presentedView = self.presentedView, let gradientView = gradientView else {
+            return
+        }
+        let views = ["gradientView": gradientView, "view": presentedView]
+        let constsH = NSLayoutConstraint.constraints("H:|-0-[gradientView]-0-[view]", views: views)
+        let constsV = NSLayoutConstraint.constraints("V:|-0-[gradientView]-0-|", views: views)
+        self.containerView?.addConstraints(constsH + constsV)
     }
     
     /// Colors for more concentrated gradient

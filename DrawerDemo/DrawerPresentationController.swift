@@ -25,6 +25,8 @@ class DrawerPresentationController: UIPresentationController {
         }
     }
     
+    /// Add target to this gesture recognizer to handle swipe gestures on 
+    /// chrome views. Default implemnetation does nothing
     private(set) weak var chromePanGestureRecognizer: UIPanGestureRecognizer?
     
     /// `containerView` is optional for some reason. In case it is nil use 
@@ -77,6 +79,7 @@ class DrawerPresentationController: UIPresentationController {
             gradientView.colors = GradientView.defaultShadowColors()
             gradientView.frame = endFrame
         }, completion: { finished in
+            // NOTE: See comments about this method on why this is called here
             self.setupGradientViewConstraints()
         })
     }
@@ -101,6 +104,8 @@ class DrawerPresentationController: UIPresentationController {
     /// Animates presented viewcontroller's view to frame for `displayMode`.
     /// Tries to animate along`presentedViewController.transitionCoordinator`
     private func updateLayout(for displayMode: DrawerPresentationControllerDisplayMode) {
+        // Not if layout is left to autolayout, unexpect behaviour occurs. Hence
+        // frame are sent manually here
         let viewFrame = frameOfPresentedViewInContainerView
         let gradientFrame = frameOfPresentedGradientViewInContainerView
         if let coordinator = presentedViewController.transitionCoordinator {
@@ -115,6 +120,9 @@ class DrawerPresentationController: UIPresentationController {
         }, completion: nil)
     }
     
+    /// Layout is as busted as ever. If add constraints prio first animation
+    /// I get unexpected behaviour. Hence first animation if dont with frame
+    /// subsequet with `layoutIfNeeded()`
     private func setupGradientViewConstraints() {
         guard let presentedView = self.presentedView, let gradientView = gradientView else {
             return

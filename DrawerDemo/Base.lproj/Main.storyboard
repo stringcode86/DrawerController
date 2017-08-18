@@ -41,39 +41,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mdU-x4-nak">
-                                <rect key="frame" x="87" y="286" width="200" height="200"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRh-P1-iWB" customClass="HamburgerView" customModule="DrawerDemo" customModuleProvider="target">
-                                <rect key="frame" x="87" y="233" width="200" height="200"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KdM-Zb-4QS" customClass="HamburgerButton" customModule="DrawerDemo" customModuleProvider="target">
+                                <rect key="frame" x="137" y="283" width="100" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="2MQ-Ev-i8U"/>
-                                    <constraint firstAttribute="height" constant="200" id="BhF-vN-DdR"/>
+                                    <constraint firstAttribute="height" constant="100" id="jNr-3s-TEq"/>
+                                    <constraint firstAttribute="width" constant="100" id="zu3-jY-CPP"/>
                                 </constraints>
-                            </view>
+                            </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gj6-RL-XMU">
-                                <rect key="frame" x="85" y="494" width="204" height="31"/>
+                                <rect key="frame" x="85" y="454" width="204" height="31"/>
                                 <connections>
                                     <action selector="sliderAction:" destination="eG2-D4-x33" eventType="valueChanged" id="bjy-1i-YcS"/>
                                 </connections>
                             </slider>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJv-D6-ZNH">
-                                <rect key="frame" x="291" y="111" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.16862745100000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mdU-x4-nak" firstAttribute="centerX" secondItem="nbF-g9-96c" secondAttribute="centerX" id="7Gy-Xm-ICj"/>
-                            <constraint firstItem="mdU-x4-nak" firstAttribute="top" secondItem="X5A-4X-TAS" secondAttribute="bottom" constant="222" id="W48-Sa-1AL"/>
-                            <constraint firstItem="gj6-RL-XMU" firstAttribute="top" secondItem="HRh-P1-iWB" secondAttribute="bottom" constant="61" id="WgC-wc-9yd"/>
-                            <constraint firstItem="HRh-P1-iWB" firstAttribute="centerY" secondItem="nbF-g9-96c" secondAttribute="centerY" id="Zg0-H4-yRE"/>
+                            <constraint firstItem="gj6-RL-XMU" firstAttribute="top" secondItem="KdM-Zb-4QS" secondAttribute="bottom" constant="71" id="ATt-5q-zUp"/>
+                            <constraint firstItem="KdM-Zb-4QS" firstAttribute="centerY" secondItem="nbF-g9-96c" secondAttribute="centerY" id="Klz-5x-aIv"/>
                             <constraint firstItem="gj6-RL-XMU" firstAttribute="leading" secondItem="nbF-g9-96c" secondAttribute="leadingMargin" constant="71" id="ivr-oa-VXJ"/>
+                            <constraint firstItem="KdM-Zb-4QS" firstAttribute="centerX" secondItem="nbF-g9-96c" secondAttribute="centerX" id="rcr-lF-F3U"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gj6-RL-XMU" secondAttribute="trailing" constant="72" id="zGV-oM-aRu"/>
-                            <constraint firstItem="HRh-P1-iWB" firstAttribute="centerX" secondItem="nbF-g9-96c" secondAttribute="centerX" id="zIZ-uS-DNS"/>
                         </constraints>
                     </view>
                     <toolbarItems>
@@ -89,18 +77,17 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="zq7-4d-ZCm">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="aiC-7n-OOj">
-                            <view key="customView" contentMode="scaleToFill" id="QRE-7Q-x8h" customClass="HamburgerView" customModule="DrawerDemo" customModuleProvider="target">
-                                <rect key="frame" x="326" y="5" width="33" height="33"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="eke-Hd-En1">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m25-wh-cpw" customClass="HamburgerButton" customModule="DrawerDemo" customModuleProvider="target">
+                                <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="hamburgerView1" destination="QRE-7Q-x8h" id="uKa-xI-i6R"/>
-                        <outlet property="hamburgerView2" destination="HRh-P1-iWB" id="xMe-qU-yb4"/>
+                        <outlet property="btnOne" destination="m25-wh-cpw" id="kLz-jN-9kg"/>
+                        <outlet property="btnTwo" destination="KdM-Zb-4QS" id="rFw-Ho-VQS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f7m-LS-ns3" userLabel="First Responder" sceneMemberID="firstResponder"/>

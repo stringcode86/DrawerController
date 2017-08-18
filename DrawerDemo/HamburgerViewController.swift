@@ -11,12 +11,7 @@ import UIKit
 class HamburgerViewController: UIViewController {
 
     @IBOutlet weak var btnOne: HamburgerButton!
-    
     @IBOutlet weak var btnTwo: HamburgerButton!
-    
-    
-    @IBOutlet weak var hamburgerView1: HamburgerView!
-    @IBOutlet weak var hamburgerView2: HamburgerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,26 +19,28 @@ class HamburgerViewController: UIViewController {
     }
     
     @IBAction func btnOneAction(_ sender: Any) {
+        
     }
     
     @IBAction func btnTwoAction(_ sender: Any) {
+    
     }
     
     
     @IBAction func sliderAction(_ sender: UISlider) {
-        hamburgerView1.progress = CGFloat(sender.value)
-        hamburgerView2.progress = CGFloat(sender.value)
+        btnOne.transitionProgress = CGFloat(sender.value)
+        btnTwo.transitionProgress = CGFloat(sender.value)
     }
     
     
     @IBAction func animateAction(_ sender: Any) {
-        hamburgerView1.animateTo(.close)
-        hamburgerView2.animateTo(.close)
+        btnOne.animateTo(.close)
+        btnTwo.animateTo(.close)
     }
     
     @IBAction func animateToHamburgerAction(_ sender: Any) {
-        hamburgerView1.animateTo(.hamburger)
-        hamburgerView2.animateTo(.hamburger)
+        btnOne.animateTo(.hamburger)
+        btnTwo.animateTo(.hamburger)
     }
     
 }

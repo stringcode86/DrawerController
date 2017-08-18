@@ -39,13 +39,13 @@ class HamburgerViewController: UIViewController {
     
     
     @IBAction func animateAction(_ sender: Any) {
-        hamburgerView1.animateToClose()
-        hamburgerView2.animateToClose()
+        hamburgerView1.animateTo(.close)
+        hamburgerView2.animateTo(.close)
     }
     
     @IBAction func animateToHamburgerAction(_ sender: Any) {
-        hamburgerView1.animateToClose(false)
-        hamburgerView2.animateToClose(false)
+        hamburgerView1.animateTo(.hamburger)
+        hamburgerView2.animateTo(.hamburger)
     }
     
 }

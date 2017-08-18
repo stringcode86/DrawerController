@@ -56,7 +56,7 @@ final class DrawerAnimator: UIPercentDrivenInteractiveTransition {
     let isPresentation: Bool
     
     /// Used for handeling of gesture reconizer (progress copuation)
-    fileprivate weak var latestContainerView: UIView?
+    weak var latestContainerView: UIView?
     
     init(direction: PresentationDirection, isPresentation: Bool) {
         self.direction = direction
@@ -86,7 +86,7 @@ extension DrawerAnimator: UIViewControllerAnimatedTransitioning {
         let finalFrame = isPresentation ? presented : dismissed
         let duration = transitionDuration(using: transitionContext)
         controller.view.frame = initialFrame
-        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.6, options: [], animations: {
+        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.6, options: [.beginFromCurrentState, .allowAnimatedContent], animations: {
             controller.view.frame = finalFrame
         }) { finished in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)

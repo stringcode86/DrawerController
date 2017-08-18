@@ -12,6 +12,8 @@ import UIKit
 
 class TestViewController: UIViewController {
     
+    @IBOutlet weak var humburgerButton: HamburgerButton?
+    
     @IBAction func testOneAction(_ sender: Any) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "TestViewController")
@@ -37,8 +39,15 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func showDrawer(_ sender: Any) {
+        //humburgerButton?.animateTo(.close)
         drawerController?.performSegue(withIdentifier: "showDrawer", sender: self)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //humburgerButton?.animateTo(.hamburger)
+    }
+    
 }
 
 

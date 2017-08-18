@@ -8,6 +8,12 @@
 
 import UIKit
 
+@objc protocol DrawerControllerDelegate: class {
+    func drawerControllerWillBeginInteractiveTransition(dc: DrawerController)
+    func drawerController(dc: DrawerController, didUpdateInteractiveTransition progress: CGFloat)
+    func drawerController(dc: DrawerController, didEndInteractiveTransition success: Bool)
+}
+
 /// `DrawerController` is container controller. Mimics conventions established 
 /// by `UISplitViewController`. It displays two `UIViewController`s. `master` is
 /// the one always visible and retained by `DrawerController` up until the point
@@ -36,7 +42,7 @@ class DrawerController: UIViewController {
     private(set) weak var drawer: UIViewController?
     
     /// Custom `UIPresentationController` that handles `drawer` presentation.
-    private let drawerTransitioningDelegate = DrawerTransitioningDelegate()
+    fileprivate let drawerTransitioningDelegate = DrawerTransitioningDelegate()
     
     /// Changes presentaton to `.drawer` or `.fullScreen`. Automatically resets 
     /// to .drawer after `drawer` is dismissed
@@ -46,6 +52,8 @@ class DrawerController: UIViewController {
             vc?.displayMode = displayMode
         }
     }
+
+    @IBOutlet weak var delegate: DrawerControllerDelegate?
     
     /// Replaces current `master` with `vc`
     override func show(_ vc: UIViewController, sender: Any?) {
@@ -79,22 +87,6 @@ class DrawerController: UIViewController {
     /// Dismissed `drawer`
     @IBAction func hideDrawerAction(_ sender: Any? ) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    /// Set this as target of `UIPanGestureRecognizer` that should drive dismiss
-    /// interactive transitioning. Do not call dismiss, just add this as target.
-    func handleDismissPan(_ recognizer: UIPanGestureRecognizer) {
-        let transitioning = drawerTransitioningDelegate.interactiveTransitioning
-        transitioning?.handleDismissPan(recognizer)
-        switch recognizer.state {
-        case .began:
-            let animator = DrawerAnimator(direction: .right, isPresentation: false)
-            drawerTransitioningDelegate.interactiveTransitioning = animator
-            dismiss(animated: true)
-        case .cancelled, .ended:
-            drawerTransitioningDelegate.interactiveTransitioning = nil
-        default: ()
-        }
     }
     
     private func setupDismissRecognizer() {
@@ -133,6 +125,44 @@ class DrawerController: UIViewController {
         super.viewDidLayoutSubviews()
     }
 }
+
+// MARK: - Handeling interactive transition
+
+extension DrawerController {
+    
+    /// Set this as target of `UIPanGestureRecognizer` that should drive dismiss
+    /// interactive transitioning. Do not call dismiss, just add this as target.
+    func handleDismissPan(_ recognizer: UIPanGestureRecognizer) {
+        let transitioning = drawerTransitioningDelegate.interactiveTransitioning
+        var progress: CGFloat = 0
+        if let view = transitioning?.latestContainerView ?? recognizer.view {
+            let translation = recognizer.translation(in: view)
+            progress = (translation.x / (view.bounds.width * 2))
+            progress = min(max(progress, 0.0), 1.0)
+        }
+        switch recognizer.state {
+        case .began:
+            delegate?.drawerControllerWillBeginInteractiveTransition(dc: self)
+            let animator = DrawerAnimator(direction: .right, isPresentation: false)
+            drawerTransitioningDelegate.interactiveTransitioning = animator
+            dismiss(animated: true)
+        case .changed:
+            transitioning?.update(progress)
+            delegate?.drawerController(dc: self, didUpdateInteractiveTransition: progress)
+        case .cancelled:
+            transitioning?.cancel()
+            delegate?.drawerController(dc: self, didEndInteractiveTransition: false)
+            drawerTransitioningDelegate.interactiveTransitioning = nil
+        case .ended:
+            let cancel = progress < 0.15
+            cancel ? transitioning?.cancel() : transitioning?.finish()
+            delegate?.drawerController(dc: self, didEndInteractiveTransition: !cancel)
+            drawerTransitioningDelegate.interactiveTransitioning = nil
+        default: ()
+        }
+    }
+}
+
 
 // MARK: - DrawerController UIViewController extension
 

@@ -8,6 +8,15 @@
 
 import UIKit
 
+class DebugLayer: CAShapeLayer {
+    override var speed: Float {
+        didSet {
+            print("Setting speed to \(speed)")
+            print("===")
+        }
+    }
+}
+
 /// `HamburgerView` draws hamburger and close icons at any scale. Supports
 /// animating and interactiver transition from one to another.
 /// NOTE: Curently underdeveloped only implement features necessary for 
@@ -48,9 +57,11 @@ class HamburgerView: UIView, CAAnimationDelegate {
         let strokeEnd   = CABasicAnimation(Key.strokeEnd, toVal: strkEnd(mode), duration: 0.6)
         strokeStart.timingFunction = Consts.strokeTiming
         strokeEnd.timingFunction   = Consts.strokeTiming
+        strokeEnd.fillMode = kCAFillModeBoth
+        strokeStart.fillMode = kCAFillModeBoth
         let topTransform = CABasicAnimation(Key.transform, toVal: transform(mode), duration: 0.4)
         topTransform.timingFunction = Consts.lineTiming
-        topTransform.fillMode = kCAFillModeBackwards
+        topTransform.fillMode = kCAFillModeBoth
         let btmTransform = topTransform.copy(withToValue: transform(mode, top: false))
         // If speed is 0 that means animating after interactive progress transition
         // In that case animation from curent presentation layer value
@@ -64,8 +75,11 @@ class HamburgerView: UIView, CAAnimationDelegate {
                 $0.speed = 1
             }
         }
+        strokeEnd.delegate = self
         allShapeLayers().forEach { $0.removeAllAnimations() }
-        [strokeStart, strokeEnd].forEach { mid.applyAnimation($0) }
+        //[strokeStart, strokeEnd].forEach { mid.applyAnimation($0) }
+        mid.applyAnimation(strokeStart)
+        mid.applyAnimation(strokeEnd)
         top.applyAnimation(topTransform)
         btm.applyAnimation(btmTransform)
     }
@@ -75,6 +89,16 @@ class HamburgerView: UIView, CAAnimationDelegate {
         layoutShapeLayers()
         super.layoutSubviews()
     }
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if flag {
+            allLineLayers().forEach {
+                $0.removeAllAnimations()
+                $0.setNeedsDisplay()
+            }
+        }
+    }
+
     
     // MARK - Private
     
@@ -95,7 +119,7 @@ class HamburgerView: UIView, CAAnimationDelegate {
     }
     
     private lazy var top = CAShapeLayer()
-    private lazy var mid = CAShapeLayer()
+    lazy var mid = DebugLayer()
     private lazy var btm = CAShapeLayer()
     private var padding: CGFloat = 10
     private var lineWidth: CGFloat = 4
@@ -120,12 +144,19 @@ class HamburgerView: UIView, CAAnimationDelegate {
     /// If there is not animation present, creates animation and sets layers
     /// `speed` to 0. Then manipulates `timeOffSet` to update presentation layer
     private func update(to progress: CGFloat) {
+        print("progress", progress)
+        print("KEys \(mid.animationKeys())")
+
         if mid.animationKeys()?.count ?? 0 == 0 {
             allShapeLayers().forEach { $0.timeOffset = 0 }
             mid.strokeEnd == strkEnd(.hamburger) ? animateTo(.close) : animateTo(.hamburger)
             allShapeLayers().forEach { $0.speed = 0 }
+            print(progress)
+
         } else if mid.speed == 0 {
             allShapeLayers().forEach { $0.timeOffset = $0.beginTime + CFTimeInterval(progress * 0.6) }
+        } else {
+            print("FUCK")
         }
     }
     

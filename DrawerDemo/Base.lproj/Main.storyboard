@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WeW-Kg-OU9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kst-Gb-Pj2">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <connections>
-                            <segue destination="2RM-Fi-koS" kind="embed" id="t9m-Wn-5vx"/>
+                            <segue destination="CKj-wL-IxW" kind="embed" id="8Iq-zj-BkZ"/>
                         </connections>
                     </containerView>
                     <connections>
@@ -28,91 +28,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5a7-ac-bYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2270" y="1743"/>
-        </scene>
-        <!--Hamburger View Controller-->
-        <scene sceneID="emV-h1-136">
-            <objects>
-                <viewController id="eG2-D4-x33" customClass="HamburgerViewController" customModule="DrawerDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="X5A-4X-TAS"/>
-                        <viewControllerLayoutGuide type="bottom" id="8c4-Wr-VBw"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="nbF-g9-96c">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KdM-Zb-4QS" customClass="HamburgerButton" customModule="DrawerDemo" customModuleProvider="target">
-                                <rect key="frame" x="137" y="283" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="jNr-3s-TEq"/>
-                                    <constraint firstAttribute="width" constant="100" id="zu3-jY-CPP"/>
-                                </constraints>
-                            </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gj6-RL-XMU">
-                                <rect key="frame" x="85" y="454" width="204" height="31"/>
-                                <connections>
-                                    <action selector="sliderAction:" destination="eG2-D4-x33" eventType="valueChanged" id="bjy-1i-YcS"/>
-                                </connections>
-                            </slider>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="gj6-RL-XMU" firstAttribute="top" secondItem="KdM-Zb-4QS" secondAttribute="bottom" constant="71" id="ATt-5q-zUp"/>
-                            <constraint firstItem="KdM-Zb-4QS" firstAttribute="centerY" secondItem="nbF-g9-96c" secondAttribute="centerY" id="Klz-5x-aIv"/>
-                            <constraint firstItem="gj6-RL-XMU" firstAttribute="leading" secondItem="nbF-g9-96c" secondAttribute="leadingMargin" constant="71" id="ivr-oa-VXJ"/>
-                            <constraint firstItem="KdM-Zb-4QS" firstAttribute="centerX" secondItem="nbF-g9-96c" secondAttribute="centerX" id="rcr-lF-F3U"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="gj6-RL-XMU" secondAttribute="trailing" constant="72" id="zGV-oM-aRu"/>
-                        </constraints>
-                    </view>
-                    <toolbarItems>
-                        <barButtonItem title="Close" id="KDa-OT-17m">
-                            <connections>
-                                <action selector="animateAction:" destination="eG2-D4-x33" id="uN3-Wp-sCY"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem title="Hamburger" id="1Ye-Wa-H1Q">
-                            <connections>
-                                <action selector="animateToHamburgerAction:" destination="eG2-D4-x33" id="r5h-uU-bn4"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" id="zq7-4d-ZCm">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="eke-Hd-En1">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m25-wh-cpw" customClass="HamburgerButton" customModule="DrawerDemo" customModuleProvider="target">
-                                <rect key="frame" x="276" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="btnOne" destination="m25-wh-cpw" id="kLz-jN-9kg"/>
-                        <outlet property="btnTwo" destination="KdM-Zb-4QS" id="rFw-Ho-VQS"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f7m-LS-ns3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2242.4000000000001" y="2611.8440779610196"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="k7p-74-vUu">
-            <objects>
-                <navigationController toolbarHidden="NO" id="WeW-Kg-OU9" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xsf-IG-kpR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="87x-0p-XTT">
-                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="eG2-D4-x33" kind="relationship" relationship="rootViewController" id="Y5i-VN-lBO"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OMH-oi-W8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2974" y="2612"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Wwp-5Z-NLb">
@@ -149,18 +64,49 @@
                                     <action selector="toggleAction:" destination="ZdC-9h-jfA" eventType="touchUpInside" id="o6z-rC-ild"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="O8M-Kv-vDa">
+                                <rect key="frame" x="44" y="410" width="287" height="31"/>
+                                <connections>
+                                    <action selector="sliderAction:" destination="ZdC-9h-jfA" eventType="valueChanged" id="3Cb-Jc-XBQ"/>
+                                </connections>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwo-xg-WGe">
+                                <rect key="frame" x="168" y="135" width="39" height="30"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="animateToClose:" destination="ZdC-9h-jfA" eventType="touchUpInside" id="AZA-rQ-nyp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3gt-GQ-Vua">
+                                <rect key="frame" x="148" y="90" width="78" height="30"/>
+                                <state key="normal" title="Hamburger"/>
+                                <connections>
+                                    <action selector="animateToHamburger:" destination="ZdC-9h-jfA" eventType="touchUpInside" id="SMp-Sm-3aF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dwo-xg-WGe" firstAttribute="top" secondItem="3gt-GQ-Vua" secondAttribute="bottom" constant="15" id="3vg-EG-qLV"/>
                             <constraint firstItem="dpa-f2-vTd" firstAttribute="centerX" secondItem="kO8-w2-sYd" secondAttribute="centerX" id="8AI-I7-zIa"/>
+                            <constraint firstItem="3gt-GQ-Vua" firstAttribute="top" secondItem="Bck-iP-F5L" secondAttribute="bottom" constant="26" id="D0i-cP-4YH"/>
+                            <constraint firstItem="dwo-xg-WGe" firstAttribute="centerX" secondItem="kO8-w2-sYd" secondAttribute="centerX" id="ODb-p8-bJl"/>
+                            <constraint firstItem="O8M-Kv-vDa" firstAttribute="top" secondItem="dpa-f2-vTd" secondAttribute="bottom" constant="62" id="YSH-K6-Suo"/>
                             <constraint firstItem="dpa-f2-vTd" firstAttribute="centerY" secondItem="kO8-w2-sYd" secondAttribute="centerY" id="ZD4-LQ-tlT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="O8M-Kv-vDa" secondAttribute="trailing" constant="30" id="bln-gp-Dnh"/>
+                            <constraint firstItem="3gt-GQ-Vua" firstAttribute="centerX" secondItem="kO8-w2-sYd" secondAttribute="centerX" id="rZE-tn-uLS"/>
+                            <constraint firstItem="O8M-Kv-vDa" firstAttribute="leading" secondItem="kO8-w2-sYd" secondAttribute="leadingMargin" constant="30" id="yJv-oh-Sog"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Drawer" id="vsH-Rv-njP">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="ceQ-xe-DoT">
-                            <connections>
-                                <action selector="hideDrawer:" destination="ZdC-9h-jfA" id="v9v-sV-Wka"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="4rQ-1d-FAZ">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gl8-LV-52n" customClass="HamburgerButton" customModule="DrawerDemo" customModuleProvider="target">
+                                <rect key="frame" x="16" y="2" width="30" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="hideDrawer:" destination="ZdC-9h-jfA" eventType="touchUpInside" id="w8H-9R-sc3"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Next" id="Shh-NW-Z9r">
                             <connections>
@@ -168,10 +114,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="hamburgerButton" destination="gl8-LV-52n" id="SjB-zU-4dU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c24-tw-i5g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-615" y="2516"/>
+            <point key="canvasLocation" x="-615.20000000000005" y="2515.5922038980511"/>
         </scene>
         <!--Testing-->
         <scene sceneID="Uvp-Bt-pkJ">
@@ -280,7 +229,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WXg-th-Ybt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-614" y="1743"/>
+            <point key="canvasLocation" x="97" y="1760"/>
         </scene>
         <!--Test View Controller-->
         <scene sceneID="sY5-7o-prW">
@@ -346,7 +295,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eYK-qj-yaL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="89" y="1743"/>
+            <point key="canvasLocation" x="801" y="1760"/>
         </scene>
         <!--Test View Controller-->
         <scene sceneID="99S-KS-LVY">
@@ -409,10 +358,40 @@
                             <constraint firstItem="dWU-Qt-LuE" firstAttribute="top" secondItem="6WZ-IY-1VC" secondAttribute="top" id="r4Y-Yn-lJC"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="3sC-VV-13G">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Yjk-iI-kpp">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V1V-HA-Iou" customClass="HamburgerButton" customModule="DrawerDemo" customModuleProvider="target">
+                                <rect key="frame" x="329" y="7" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="showDrawer:" destination="2RM-Fi-koS" eventType="touchUpInside" id="kDz-ZG-ZiM"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="humburgerButton" destination="V1V-HA-Iou" id="RSd-HL-JPx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggr-kQ-gIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1396" y="1743"/>
+            <point key="canvasLocation" x="-684" y="1760"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="E9Q-oD-5Un">
+            <objects>
+                <navigationController id="CKj-wL-IxW" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="L9U-BC-WLo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2RM-Fi-koS" kind="relationship" relationship="rootViewController" id="bj6-H2-zhq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FkC-62-B10" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1465" y="1743"/>
         </scene>
     </scenes>
 </document>

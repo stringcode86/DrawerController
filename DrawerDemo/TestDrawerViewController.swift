@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DrawerViewController: UIViewController, DrawerControllerDelegate {
+class TestDrawerViewController: UIViewController, DrawerControllerDelegate {
 
     @IBOutlet weak var hamburgerButton: HamburgerButton!
     

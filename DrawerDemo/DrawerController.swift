@@ -211,12 +211,13 @@ extension UIViewController {
     /// accordingly if the return value is not `self`, otherwise it will present 
     /// the vc.
     func showDrawerViewController(_ vc: UIViewController, sender: Any?) {
-        let selector = #selector(showDetailViewController(_:sender:))
+        let selector = #selector(showDrawerViewController(_:sender:))
         let handler = targetViewController(forAction: selector, sender: sender)
         if let handler = handler, handler != self {
-                handler.showDrawerViewController(vc, sender: sender)
+            handler.showDrawerViewController(vc, sender: sender)
+        } else {
+            present(vc, animated: true, completion: nil)
         }
-        present(vc, animated: true, completion: nil)
     }
 }
 

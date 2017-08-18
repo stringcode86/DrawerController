@@ -27,7 +27,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5a7-ac-bYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2270" y="1743"/>
+            <point key="canvasLocation" x="-2278" y="1743"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Wwp-5Z-NLb">
@@ -43,12 +43,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PJL-6o-wdI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1396" y="2516"/>
+            <point key="canvasLocation" x="-1466" y="2516"/>
         </scene>
         <!--Drawer-->
         <scene sceneID="cKH-0k-Owq">
             <objects>
-                <viewController id="ZdC-9h-jfA" customClass="DrawerViewController" customModule="DrawerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZdC-9h-jfA" customClass="TestDrawerViewController" customModule="DrawerDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bck-iP-F5L"/>
                         <viewControllerLayoutGuide type="bottom" id="7Dm-ca-w7D"/>
@@ -187,37 +187,37 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wc7-su-Ads">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTe-vJ-u1r">
-                                        <rect key="frame" x="164.5" y="0.0" width="46" height="129.5"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="UTe-vJ-u1r">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="129.5"/>
+                                        <state key="normal" title="Show Navigation as root (calls show Drawer controlle, replaced as root)"/>
                                         <connections>
                                             <action selector="testOneAction:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="T7b-mm-s7y"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r1F-YJ-uXy">
-                                        <rect key="frame" x="164.5" y="129.5" width="46" height="129.5"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="r1F-YJ-uXy">
+                                        <rect key="frame" x="0.0" y="129.5" width="375" height="129.5"/>
+                                        <state key="normal" title="Show Yellow (call show on self, will be pushed or replaced as root, depending on container)"/>
                                         <connections>
                                             <action selector="testTwoAction:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="NOK-tG-Ypp"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yke-D0-01A">
-                                        <rect key="frame" x="164.5" y="259" width="46" height="129"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="yke-D0-01A">
+                                        <rect key="frame" x="0.0" y="259" width="375" height="129"/>
+                                        <state key="normal" title="Show Magenta (call show Drawer controlle, replaced as root)"/>
                                         <connections>
                                             <action selector="testThreeAction:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="t3U-FG-OXl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QlK-Jj-Min">
-                                        <rect key="frame" x="164.5" y="388" width="46" height="129.5"/>
-                                        <state key="normal" title="Button"/>
+                                        <rect key="frame" x="144.5" y="388" width="86" height="129.5"/>
+                                        <state key="normal" title="Show debug"/>
                                         <connections>
                                             <action selector="showDebugAction:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="Xkw-GA-6rf"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYx-zs-j7d">
-                                        <rect key="frame" x="164.5" y="517.5" width="46" height="129.5"/>
-                                        <state key="normal" title="Button"/>
+                                        <rect key="frame" x="143" y="517.5" width="89" height="129.5"/>
+                                        <state key="normal" title="Show drawer"/>
                                         <connections>
                                             <action selector="showDrawer:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="RdO-ve-8Ef"/>
                                         </connections>
@@ -236,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WXg-th-Ybt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="97" y="1760"/>
+            <point key="canvasLocation" x="89" y="1743"/>
         </scene>
         <!--Test View Controller-->
         <scene sceneID="sY5-7o-prW">
@@ -253,37 +253,37 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8yJ-jT-hrf">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsL-Ep-a3V">
-                                        <rect key="frame" x="164.5" y="0.0" width="46" height="129.5"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="wsL-Ep-a3V">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="129.5"/>
+                                        <state key="normal" title="Show Navigation as root (calls show Drawer controlle, replaced as root)"/>
                                         <connections>
                                             <action selector="testOneAction:" destination="tpI-80-Abn" eventType="touchUpInside" id="MKV-FT-eLz"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBz-se-FK2">
-                                        <rect key="frame" x="164.5" y="129.5" width="46" height="129.5"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="pBz-se-FK2">
+                                        <rect key="frame" x="0.0" y="129.5" width="375" height="129.5"/>
+                                        <state key="normal" title="Show Yellow (call show on self, will be pushed or replaced as root, depending on container)"/>
                                         <connections>
                                             <action selector="testTwoAction:" destination="tpI-80-Abn" eventType="touchUpInside" id="a65-nv-euk"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amZ-DG-j3b">
-                                        <rect key="frame" x="164.5" y="259" width="46" height="129"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="amZ-DG-j3b">
+                                        <rect key="frame" x="0.0" y="259" width="375" height="129"/>
+                                        <state key="normal" title="Show Magenta (call show Drawer controlle, replaced as root)"/>
                                         <connections>
                                             <action selector="testThreeAction:" destination="tpI-80-Abn" eventType="touchUpInside" id="SUZ-j0-ae0"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeZ-2z-EUZ">
-                                        <rect key="frame" x="164.5" y="388" width="46" height="129.5"/>
-                                        <state key="normal" title="Button"/>
+                                        <rect key="frame" x="145.5" y="388" width="84" height="129.5"/>
+                                        <state key="normal" title="show debug"/>
                                         <connections>
                                             <action selector="showDebugAction:" destination="tpI-80-Abn" eventType="touchUpInside" id="Z80-fv-kqo"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCV-0h-50S">
-                                        <rect key="frame" x="164.5" y="517.5" width="46" height="129.5"/>
-                                        <state key="normal" title="Button"/>
+                                        <rect key="frame" x="143" y="517.5" width="89" height="129.5"/>
+                                        <state key="normal" title="Show drawer"/>
                                         <connections>
                                             <action selector="showDrawer:" destination="tpI-80-Abn" eventType="touchUpInside" id="y1n-BA-wkH"/>
                                         </connections>
@@ -302,12 +302,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eYK-qj-yaL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="801" y="1760"/>
+            <point key="canvasLocation" x="801" y="1743"/>
         </scene>
         <!--Test View Controller-->
         <scene sceneID="99S-KS-LVY">
             <objects>
-                <viewController storyboardIdentifier="TestViewController" id="2RM-Fi-koS" customClass="TestViewController" customModule="DrawerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2RM-Fi-koS" customClass="TestViewController" customModule="DrawerDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4mb-41-gEi"/>
                         <viewControllerLayoutGuide type="bottom" id="mHF-8r-Odb"/>
@@ -317,38 +317,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dWU-Qt-LuE">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6PO-AG-zo8">
-                                        <rect key="frame" x="144" y="0.0" width="87" height="133.5"/>
-                                        <state key="normal" title="Test action 1"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="2p2-gU-Hzu">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="151"/>
+                                        <state key="normal" title="Show Yellow (call show on self, will be pushed or replaced as root, depending on container)"/>
                                         <connections>
-                                            <action selector="testOneAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="W8c-cJ-1gW"/>
+                                            <action selector="testTwoAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="9S3-iW-vqp"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEm-UJ-xi6">
-                                        <rect key="frame" x="143" y="133.5" width="89" height="133.5"/>
-                                        <state key="normal" title="Test action 2"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="JW8-Ye-weU">
+                                        <rect key="frame" x="0.0" y="151" width="375" height="150.5"/>
+                                        <state key="normal" title="Show Magenta (call show Drawer controlle, replaced as root)"/>
                                         <connections>
-                                            <action selector="testTwoAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="UPK-RU-9zg"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JW8-Ye-weU">
-                                        <rect key="frame" x="143" y="267" width="89" height="133"/>
-                                        <state key="normal" title="Test action 3"/>
-                                        <connections>
-                                            <action selector="testThreeAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="c1h-uh-6If"/>
+                                            <action selector="testThreeAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="O1T-J8-wQC"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igj-4G-evu">
-                                        <rect key="frame" x="144.5" y="400" width="86" height="133.5"/>
+                                        <rect key="frame" x="144.5" y="301.5" width="86" height="151"/>
                                         <state key="normal" title="Show debug"/>
                                         <connections>
                                             <action selector="showDebugAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="YMA-bU-OZf"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZY-rb-qu1">
-                                        <rect key="frame" x="143" y="533.5" width="89" height="133.5"/>
+                                        <rect key="frame" x="143" y="452.5" width="89" height="150.5"/>
                                         <state key="normal" title="Show drawer"/>
                                         <connections>
                                             <action selector="showDrawer:" destination="2RM-Fi-koS" eventType="touchUpInside" id="K9h-ZR-tmo"/>
@@ -362,8 +355,8 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="dWU-Qt-LuE" secondAttribute="bottom" id="PTK-ms-7AR"/>
                             <constraint firstItem="dWU-Qt-LuE" firstAttribute="leading" secondItem="6WZ-IY-1VC" secondAttribute="leading" id="eJP-1n-wh4"/>
+                            <constraint firstItem="dWU-Qt-LuE" firstAttribute="top" secondItem="4mb-41-gEi" secondAttribute="bottom" id="iRB-MQ-KRj"/>
                             <constraint firstAttribute="trailing" secondItem="dWU-Qt-LuE" secondAttribute="trailing" id="jnp-s0-yru"/>
-                            <constraint firstItem="dWU-Qt-LuE" firstAttribute="top" secondItem="6WZ-IY-1VC" secondAttribute="top" id="r4Y-Yn-lJC"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="bIk-xs-tEg" appends="YES" id="PmR-nf-8C3"/>
@@ -376,8 +369,8 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <action selector="showDrawer:" destination="2RM-Fi-koS" eventType="touchUpInside" id="kDz-ZG-ZiM"/>
                                     <outletCollection property="gestureRecognizers" destination="Hec-dD-fP9" appends="YES" id="ISt-K0-CnJ"/>
+                                    <segue destination="Ufl-jM-EhD" kind="custom" identifier="showDrawer" customClass="ShowInDrawerSegue" customModule="DrawerDemo" customModuleProvider="target" id="c2U-vl-Ko0"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -399,12 +392,12 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-684" y="1760"/>
+            <point key="canvasLocation" x="-684" y="1743"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="E9Q-oD-5Un">
             <objects>
-                <navigationController id="CKj-wL-IxW" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TestViewController" id="CKj-wL-IxW" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="L9U-BC-WLo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -418,4 +411,7 @@
             <point key="canvasLocation" x="-1465" y="1743"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="c2U-vl-Ko0"/>
+    </inferredMetricsTieBreakers>
 </document>

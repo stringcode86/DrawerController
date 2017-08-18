@@ -24,8 +24,7 @@ class TestViewController: UIViewController {
     @IBAction func testTwoAction(_ sender: Any) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "YellowViewController")
-        // drawerController?.show(vc, sender: self)
-        present(vc, animated: true, completion: nil)
+        show(vc, sender: self)
     }
 
     @IBAction func testThreeAction(_ sender: Any) {

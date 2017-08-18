@@ -9,14 +9,13 @@
 /* Begin PBXBuildFile section */
 		9F1C56C01F44785800FD85F2 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C56BF1F44785800FD85F2 /* GradientView.swift */; };
 		9F1C56C21F45A66400FD85F2 /* NSLayoutConstraint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C56C11F45A66400FD85F2 /* NSLayoutConstraint+Extensions.swift */; };
-		9F1C56C71F45B83100FD85F2 /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C56C61F45B83100FD85F2 /* HamburgerViewController.swift */; };
 		9F818F2A1F42EF1F00550E0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F291F42EF1F00550E0D /* AppDelegate.swift */; };
 		9F818F2F1F42EF1F00550E0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F818F2D1F42EF1F00550E0D /* Main.storyboard */; };
 		9F818F311F42EF1F00550E0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F818F301F42EF1F00550E0D /* Assets.xcassets */; };
 		9F818F341F42EF1F00550E0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F818F321F42EF1F00550E0D /* LaunchScreen.storyboard */; };
 		9F818F461F43012C00550E0D /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F451F43012C00550E0D /* DrawerController.swift */; };
 		9F818F551F43174100550E0D /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F541F43174100550E0D /* TestViewController.swift */; };
-		9F818F571F432D1200550E0D /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F561F432D1200550E0D /* DrawerViewController.swift */; };
+		9F818F571F432D1200550E0D /* TestDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F561F432D1200550E0D /* TestDrawerViewController.swift */; };
 		9F818F591F43453B00550E0D /* DrawerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F581F43453B00550E0D /* DrawerPresentationController.swift */; };
 		9F818F5B1F43481300550E0D /* DrawerTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F818F5A1F43481300550E0D /* DrawerTransitioning.swift */; };
 		9FF18CDE1F46044700A73291 /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF18CDD1F46044700A73291 /* HamburgerView.swift */; };
@@ -26,7 +25,6 @@
 /* Begin PBXFileReference section */
 		9F1C56BF1F44785800FD85F2 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		9F1C56C11F45A66400FD85F2 /* NSLayoutConstraint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extensions.swift"; sourceTree = "<group>"; };
-		9F1C56C61F45B83100FD85F2 /* HamburgerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
 		9F818F261F42EF1F00550E0D /* DrawerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F818F291F42EF1F00550E0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F818F2E1F42EF1F00550E0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,7 +33,7 @@
 		9F818F351F42EF1F00550E0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F818F451F43012C00550E0D /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
 		9F818F541F43174100550E0D /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		9F818F561F432D1200550E0D /* DrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
+		9F818F561F432D1200550E0D /* TestDrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDrawerViewController.swift; sourceTree = "<group>"; };
 		9F818F581F43453B00550E0D /* DrawerPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerPresentationController.swift; sourceTree = "<group>"; };
 		9F818F5A1F43481300550E0D /* DrawerTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerTransitioning.swift; sourceTree = "<group>"; };
 		9FF18CDD1F46044700A73291 /* HamburgerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerView.swift; sourceTree = "<group>"; };
@@ -84,8 +82,7 @@
 				9F1C56C31F45A67A00FD85F2 /* Extensions */,
 				9F818F5E1F43486800550E0D /* DrawerController */,
 				9F818F541F43174100550E0D /* TestViewController.swift */,
-				9F818F561F432D1200550E0D /* DrawerViewController.swift */,
-				9F1C56C61F45B83100FD85F2 /* HamburgerViewController.swift */,
+				9F818F561F432D1200550E0D /* TestDrawerViewController.swift */,
 				9F818F2D1F42EF1F00550E0D /* Main.storyboard */,
 				9F818F301F42EF1F00550E0D /* Assets.xcassets */,
 				9F818F321F42EF1F00550E0D /* LaunchScreen.storyboard */,
@@ -189,7 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F818F2A1F42EF1F00550E0D /* AppDelegate.swift in Sources */,
-				9F818F571F432D1200550E0D /* DrawerViewController.swift in Sources */,
+				9F818F571F432D1200550E0D /* TestDrawerViewController.swift in Sources */,
 				9F818F591F43453B00550E0D /* DrawerPresentationController.swift in Sources */,
 				9F818F551F43174100550E0D /* TestViewController.swift in Sources */,
 				9F1C56C01F44785800FD85F2 /* GradientView.swift in Sources */,
@@ -198,7 +195,6 @@
 				9F1C56C21F45A66400FD85F2 /* NSLayoutConstraint+Extensions.swift in Sources */,
 				9F818F5B1F43481300550E0D /* DrawerTransitioning.swift in Sources */,
 				9F818F461F43012C00550E0D /* DrawerController.swift in Sources */,
-				9F1C56C71F45B83100FD85F2 /* HamburgerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

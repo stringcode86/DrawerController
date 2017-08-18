@@ -78,9 +78,11 @@ class DrawerPresentationController: UIPresentationController {
             gradientView.alpha = 1
             gradientView.colors = GradientView.defaultShadowColors()
             gradientView.frame = endFrame
-        }, completion: { finished in
+        }, completion: { coordinator in
             // NOTE: See comments about this method on why this is called here
-            self.setupGradientViewConstraints()
+            if coordinator.isCancelled == false {
+                self.setupGradientViewConstraints()
+            }
         })
     }
     

@@ -13,7 +13,7 @@ import UIKit
 /// animating and interactiver transition from one to another.
 /// NOTE: Curently underdeveloped only implement features necessary for 
 /// use with `DrawerController`
-class HamburgerView: UIView, CAAnimationDelegate {
+@IBDesignable class HamburgerView: UIView, CAAnimationDelegate {
     
     enum Mode {
         case hamburger
@@ -76,16 +76,6 @@ class HamburgerView: UIView, CAAnimationDelegate {
         layoutShapeLayers()
         super.layoutSubviews()
     }
-    
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        if flag {
-            allLineLayers().forEach {
-                $0.removeAllAnimations()
-                $0.setNeedsDisplay()
-            }
-        }
-    }
-
     
     // MARK - Private
     
@@ -239,6 +229,17 @@ class HamburgerView: UIView, CAAnimationDelegate {
         layer.actions = ["strokeStart": NSNull(),
                          "strokeEnd": NSNull(),
                          "transform": NSNull()]
+    }
+    
+    /// HACK: to avoid issues with animations not being removed on completions
+    /// https://stackoverflow.com/questions/12798207/unpredictable-behavior-with-core-animation-cabasicanimation
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if flag {
+            allLineLayers().forEach {
+                $0.removeAllAnimations()
+                $0.setNeedsDisplay()
+            }
+        }
     }
 }
 

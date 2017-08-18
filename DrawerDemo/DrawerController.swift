@@ -8,7 +8,6 @@
 
 import UIKit
 
-/// `DrawerController` used to inform delegate 
 @objc protocol DrawerControllerDelegate: class {
     @objc optional func drawerControllerWillBeginInteractiveTransition(dc: DrawerController)
     @objc optional func drawerController(dc: DrawerController, didUpdateInteractiveTransition progress: CGFloat)
@@ -131,22 +130,37 @@ class DrawerController: UIViewController {
 
 extension DrawerController {
     
+    func prepareForInteractivePresentation() {
+        delegate?.drawerControllerWillBeginInteractiveTransition?(dc: self)
+        let animator = DrawerAnimator(direction: .right, isPresentation: true)
+        drawerTransitioningDelegate.interactiveTransitioning = animator
+    }
+    
+    func handlePresentationPan(_ recognizer: UIPanGestureRecognizer) {
+        handleTransitionPan(recognizer, presentation: true)
+    }
+    
     /// Set this as target of `UIPanGestureRecognizer` that should drive dismiss
     /// interactive transitioning. Do not call dismiss, just add this as target.
     func handleDismissPan(_ recognizer: UIPanGestureRecognizer) {
+        handleTransitionPan(recognizer)
+    }
+    
+    private func handleTransitionPan(_ recognizer: UIPanGestureRecognizer, presentation: Bool = false) {
         let transitioning = drawerTransitioningDelegate.interactiveTransitioning
-        var progress: CGFloat = 0
-        if let view = transitioning?.latestContainerView ?? recognizer.view {
-            let translation = recognizer.translation(in: view)
-            progress = (translation.x / (view.bounds.width * 2))
-            progress = min(max(progress, 0.0), 1.0)
-        }
+        let view: UIView = transitioning?.latestContainerView ?? self.view
+        let translation = recognizer.translation(in: view)
+        var progress: CGFloat = (translation.x / (view.bounds.width * 2))
+        progress = min(max(presentation ? -progress : progress, 0.0), 1.0)
         switch recognizer.state {
         case .began:
-            delegate?.drawerControllerWillBeginInteractiveTransition?(dc: self)
-            let animator = DrawerAnimator(direction: .right, isPresentation: false)
-            drawerTransitioningDelegate.interactiveTransitioning = animator
-            dismiss(animated: true)
+            // Only setup for dismiss transition
+            if presentation == false {
+                delegate?.drawerControllerWillBeginInteractiveTransition?(dc: self)
+                let animator = DrawerAnimator(direction: .right, isPresentation: false)
+                drawerTransitioningDelegate.interactiveTransitioning = animator
+                dismiss(animated: true)
+            }
         case .changed:
             transitioning?.update(progress)
             delegate?.drawerController?(dc: self, didUpdateInteractiveTransition: progress)

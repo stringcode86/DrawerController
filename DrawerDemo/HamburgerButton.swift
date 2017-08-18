@@ -11,7 +11,7 @@ import UIKit
 /// `HamburgerButton` display button with "Hamburger" or "Close" icon. Support
 /// interactive transition via `transitionProgress` property. After interactive
 /// transition animateTo(_:) should be called with desired end state.
-class HamburgerButton: UIButton {
+@IBDesignable class HamburgerButton: UIButton {
     
     private lazy var hamburgerView: HamburgerView = HamburgerView()
     

@@ -62,6 +62,11 @@ class DrawerViewController: UIViewController, DrawerControllerDelegate {
         hamburgerButton.animateTo(success ? .hamburger : .close)
     }
     
+    @IBAction func panned(_ sender: UIPanGestureRecognizer) {
+        drawerController?.handleDismissPan(sender)
+    }
+    
+    
     // MARK: - Debug
     
     @IBAction func sliderAction(_ sender: UISlider) {

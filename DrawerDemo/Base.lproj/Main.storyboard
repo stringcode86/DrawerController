@@ -103,8 +103,10 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gl8-LV-52n" customClass="HamburgerButton" customModule="DrawerDemo" customModuleProvider="target">
                                 <rect key="frame" x="16" y="2" width="30" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <action selector="hideDrawer:" destination="ZdC-9h-jfA" eventType="touchUpInside" id="w8H-9R-sc3"/>
+                                    <outletCollection property="gestureRecognizers" destination="3EU-tP-Eku" appends="YES" id="1UH-HW-0Q4"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -119,6 +121,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c24-tw-i5g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="3EU-tP-Eku">
+                    <connections>
+                        <action selector="panned:" destination="ZdC-9h-jfA" id="A3p-Pq-MvS"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-615.20000000000005" y="2515.5922038980511"/>
         </scene>
@@ -351,20 +358,26 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="dWU-Qt-LuE" secondAttribute="bottom" id="PTK-ms-7AR"/>
                             <constraint firstItem="dWU-Qt-LuE" firstAttribute="leading" secondItem="6WZ-IY-1VC" secondAttribute="leading" id="eJP-1n-wh4"/>
                             <constraint firstAttribute="trailing" secondItem="dWU-Qt-LuE" secondAttribute="trailing" id="jnp-s0-yru"/>
                             <constraint firstItem="dWU-Qt-LuE" firstAttribute="top" secondItem="6WZ-IY-1VC" secondAttribute="top" id="r4Y-Yn-lJC"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="bIk-xs-tEg" appends="YES" id="PmR-nf-8C3"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="3sC-VV-13G">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Yjk-iI-kpp">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V1V-HA-Iou" customClass="HamburgerButton" customModule="DrawerDemo" customModuleProvider="target">
                                 <rect key="frame" x="329" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <action selector="showDrawer:" destination="2RM-Fi-koS" eventType="touchUpInside" id="kDz-ZG-ZiM"/>
+                                    <outletCollection property="gestureRecognizers" destination="Hec-dD-fP9" appends="YES" id="ISt-K0-CnJ"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -374,6 +387,17 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggr-kQ-gIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="bIk-xs-tEg">
+                    <rectEdge key="edges" right="YES"/>
+                    <connections>
+                        <action selector="rightEdgePan:" destination="2RM-Fi-koS" id="Owy-oX-q47"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Hec-dD-fP9">
+                    <connections>
+                        <action selector="rightEdgePan:" destination="2RM-Fi-koS" id="Qfa-7w-fUt"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-684" y="1760"/>
         </scene>

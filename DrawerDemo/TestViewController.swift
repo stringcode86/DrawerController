@@ -46,8 +46,18 @@ class TestViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //humburgerButton?.animateTo(.hamburger)
+        
     }
     
+    @IBAction func rightEdgePan(_ sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            drawerController?.prepareForInteractivePresentation()
+            drawerController?.performSegue(withIdentifier: "showDrawer", sender: self)
+        default:
+            drawerController?.handlePresentationPan(sender)
+        }
+    }
 }
 
 

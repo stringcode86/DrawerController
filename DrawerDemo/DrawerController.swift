@@ -8,10 +8,11 @@
 
 import UIKit
 
+/// `DrawerController` used to inform delegate 
 @objc protocol DrawerControllerDelegate: class {
-    func drawerControllerWillBeginInteractiveTransition(dc: DrawerController)
-    func drawerController(dc: DrawerController, didUpdateInteractiveTransition progress: CGFloat)
-    func drawerController(dc: DrawerController, didEndInteractiveTransition success: Bool)
+    @objc optional func drawerControllerWillBeginInteractiveTransition(dc: DrawerController)
+    @objc optional func drawerController(dc: DrawerController, didUpdateInteractiveTransition progress: CGFloat)
+    @objc optional func drawerController(dc: DrawerController, didEndInteractiveTransition success: Bool)
 }
 
 /// `DrawerController` is container controller. Mimics conventions established 
@@ -142,21 +143,21 @@ extension DrawerController {
         }
         switch recognizer.state {
         case .began:
-            delegate?.drawerControllerWillBeginInteractiveTransition(dc: self)
+            delegate?.drawerControllerWillBeginInteractiveTransition?(dc: self)
             let animator = DrawerAnimator(direction: .right, isPresentation: false)
             drawerTransitioningDelegate.interactiveTransitioning = animator
             dismiss(animated: true)
         case .changed:
             transitioning?.update(progress)
-            delegate?.drawerController(dc: self, didUpdateInteractiveTransition: progress)
+            delegate?.drawerController?(dc: self, didUpdateInteractiveTransition: progress)
         case .cancelled:
             transitioning?.cancel()
-            delegate?.drawerController(dc: self, didEndInteractiveTransition: false)
+            delegate?.drawerController?(dc: self, didEndInteractiveTransition: false)
             drawerTransitioningDelegate.interactiveTransitioning = nil
         case .ended:
             let cancel = progress < 0.15
             cancel ? transitioning?.cancel() : transitioning?.finish()
-            delegate?.drawerController(dc: self, didEndInteractiveTransition: !cancel)
+            delegate?.drawerController?(dc: self, didEndInteractiveTransition: !cancel)
             drawerTransitioningDelegate.interactiveTransitioning = nil
         default: ()
         }

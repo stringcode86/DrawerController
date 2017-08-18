@@ -13,7 +13,7 @@ import UIKit
 /// transition animateTo(_:) should be called with desired end state.
 class HamburgerButton: UIButton {
     
-    lazy var hamburgerView: HamburgerView = HamburgerView()
+    private lazy var hamburgerView: HamburgerView = HamburgerView()
     
     /// Returns mode based on current UI state
     var mode: HamburgerView.Mode {
@@ -36,7 +36,6 @@ class HamburgerButton: UIButton {
     
     /// Animates button icon to given `mode`.
     func animateTo(_ mode: HamburgerView.Mode) {
-        print("anim \(hamburgerView)")
         hamburgerView.animateTo(mode)
     }
     

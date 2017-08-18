@@ -8,14 +8,6 @@
 
 import UIKit
 
-class DebugLayer: CAShapeLayer {
-    override var speed: Float {
-        didSet {
-            print("Setting speed to \(speed)")
-            print("===")
-        }
-    }
-}
 
 /// `HamburgerView` draws hamburger and close icons at any scale. Supports
 /// animating and interactiver transition from one to another.
@@ -55,21 +47,18 @@ class HamburgerView: UIView, CAAnimationDelegate {
         // Create animations
         let strokeStart = CABasicAnimation(Key.strokeStart, toVal: strkStart(mode), duration: 0.5)
         let strokeEnd   = CABasicAnimation(Key.strokeEnd, toVal: strkEnd(mode), duration: 0.6)
+        let tTransform  = CABasicAnimation(Key.transform, toVal: transform(mode), duration: 0.4)
         strokeStart.timingFunction = Consts.strokeTiming
         strokeEnd.timingFunction   = Consts.strokeTiming
-        strokeEnd.fillMode = kCAFillModeBoth
-        strokeStart.fillMode = kCAFillModeBoth
-        let topTransform = CABasicAnimation(Key.transform, toVal: transform(mode), duration: 0.4)
-        topTransform.timingFunction = Consts.lineTiming
-        topTransform.fillMode = kCAFillModeBoth
-        let btmTransform = topTransform.copy(withToValue: transform(mode, top: false))
+        tTransform.timingFunction  = Consts.lineTiming
+        let bTransform = tTransform.copy(withToValue: transform(mode, top: false))
         // If speed is 0 that means animating after interactive progress transition
         // In that case animation from curent presentation layer value
         if mid.speed == 0 {
             strokeStart.fromValue = mid.presentation()?.value(forKeyPath: Key.strokeStart)
             strokeEnd.fromValue = mid.presentation()?.value(forKeyPath: Key.strokeEnd)
-            topTransform.fromValue = top.presentation()?.value(forKeyPath: Key.transform)
-            btmTransform.fromValue = btm.presentation()?.value(forKeyPath: Key.transform)
+            tTransform.fromValue = top.presentation()?.value(forKeyPath: Key.transform)
+            bTransform.fromValue = btm.presentation()?.value(forKeyPath: Key.transform)
             allShapeLayers().forEach {
                 $0.timeOffset = $0.beginTime + Date().timeIntervalSince1970
                 $0.speed = 1
@@ -77,11 +66,9 @@ class HamburgerView: UIView, CAAnimationDelegate {
         }
         strokeEnd.delegate = self
         allShapeLayers().forEach { $0.removeAllAnimations() }
-        //[strokeStart, strokeEnd].forEach { mid.applyAnimation($0) }
-        mid.applyAnimation(strokeStart)
-        mid.applyAnimation(strokeEnd)
-        top.applyAnimation(topTransform)
-        btm.applyAnimation(btmTransform)
+        [strokeStart, strokeEnd].forEach { mid.applyAnimation($0) }
+        top.applyAnimation(tTransform)
+        btm.applyAnimation(bTransform)
     }
     
     override func layoutSubviews() {
@@ -119,7 +106,7 @@ class HamburgerView: UIView, CAAnimationDelegate {
     }
     
     private lazy var top = CAShapeLayer()
-    lazy var mid = DebugLayer()
+    private lazy var mid = CAShapeLayer()
     private lazy var btm = CAShapeLayer()
     private var padding: CGFloat = 10
     private var lineWidth: CGFloat = 4
@@ -144,19 +131,12 @@ class HamburgerView: UIView, CAAnimationDelegate {
     /// If there is not animation present, creates animation and sets layers
     /// `speed` to 0. Then manipulates `timeOffSet` to update presentation layer
     private func update(to progress: CGFloat) {
-        print("progress", progress)
-        print("KEys \(mid.animationKeys())")
-
         if mid.animationKeys()?.count ?? 0 == 0 {
             allShapeLayers().forEach { $0.timeOffset = 0 }
             mid.strokeEnd == strkEnd(.hamburger) ? animateTo(.close) : animateTo(.hamburger)
             allShapeLayers().forEach { $0.speed = 0 }
-            print(progress)
-
         } else if mid.speed == 0 {
             allShapeLayers().forEach { $0.timeOffset = $0.beginTime + CFTimeInterval(progress * 0.6) }
-        } else {
-            print("FUCK")
         }
     }
     
@@ -288,6 +268,7 @@ extension CABasicAnimation {
         self.toValue = toVal
         self.duration = duration
         self.isRemovedOnCompletion = true
+        self.fillMode = kCAFillModeBoth
     }
     
     func copy(withToValue val: Any?) -> CABasicAnimation {

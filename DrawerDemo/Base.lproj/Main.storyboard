@@ -41,19 +41,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kqi-ea-G1d" customClass="HamburgerButton" customModule="DrawerDemo" customModuleProvider="target">
-                                <rect key="frame" x="172" y="369" width="30" height="34"/>
-                                <connections>
-                                    <action selector="btnTwoAction:" destination="eG2-D4-x33" eventType="touchUpInside" id="cwY-KB-aVT"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mdU-x4-nak">
                                 <rect key="frame" x="87" y="286" width="200" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRh-P1-iWB" customClass="HamburgerView" customModule="DrawerDemo" customModuleProvider="target">
                                 <rect key="frame" x="87" y="233" width="200" height="200"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="2MQ-Ev-i8U"/>
                                     <constraint firstAttribute="height" constant="200" id="BhF-vN-DdR"/>
@@ -65,12 +59,15 @@
                                     <action selector="sliderAction:" destination="eG2-D4-x33" eventType="valueChanged" id="bjy-1i-YcS"/>
                                 </connections>
                             </slider>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJv-D6-ZNH">
+                                <rect key="frame" x="291" y="111" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.16862745100000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mdU-x4-nak" firstAttribute="centerX" secondItem="nbF-g9-96c" secondAttribute="centerX" id="7Gy-Xm-ICj"/>
-                            <constraint firstItem="mdU-x4-nak" firstAttribute="centerY" secondItem="Kqi-ea-G1d" secondAttribute="centerY" id="Pzs-JS-GUs"/>
-                            <constraint firstItem="mdU-x4-nak" firstAttribute="centerX" secondItem="Kqi-ea-G1d" secondAttribute="centerX" id="Vn0-6w-Ugk"/>
                             <constraint firstItem="mdU-x4-nak" firstAttribute="top" secondItem="X5A-4X-TAS" secondAttribute="bottom" constant="222" id="W48-Sa-1AL"/>
                             <constraint firstItem="gj6-RL-XMU" firstAttribute="top" secondItem="HRh-P1-iWB" secondAttribute="bottom" constant="61" id="WgC-wc-9yd"/>
                             <constraint firstItem="HRh-P1-iWB" firstAttribute="centerY" secondItem="nbF-g9-96c" secondAttribute="centerY" id="Zg0-H4-yRE"/>
@@ -96,13 +93,12 @@
                             <view key="customView" contentMode="scaleToFill" id="QRE-7Q-x8h" customClass="HamburgerView" customModule="DrawerDemo" customModuleProvider="target">
                                 <rect key="frame" x="326" y="5" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="btnTwo" destination="Kqi-ea-G1d" id="6r3-oq-Ahv"/>
                         <outlet property="hamburgerView1" destination="QRE-7Q-x8h" id="uKa-xI-i6R"/>
                         <outlet property="hamburgerView2" destination="HRh-P1-iWB" id="xMe-qU-yb4"/>
                     </connections>
@@ -249,35 +245,35 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTe-vJ-u1r">
-                                        <rect key="frame" x="165" y="0.0" width="46" height="129"/>
+                                        <rect key="frame" x="164.5" y="0.0" width="46" height="129.5"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="testOneAction:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="T7b-mm-s7y"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r1F-YJ-uXy">
-                                        <rect key="frame" x="165" y="129" width="46" height="130"/>
+                                        <rect key="frame" x="164.5" y="129.5" width="46" height="129.5"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="testTwoAction:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="NOK-tG-Ypp"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yke-D0-01A">
-                                        <rect key="frame" x="165" y="259" width="46" height="129"/>
+                                        <rect key="frame" x="164.5" y="259" width="46" height="129"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="testThreeAction:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="t3U-FG-OXl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QlK-Jj-Min">
-                                        <rect key="frame" x="165" y="388" width="46" height="130"/>
+                                        <rect key="frame" x="164.5" y="388" width="46" height="129.5"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="showDebugAction:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="Xkw-GA-6rf"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYx-zs-j7d">
-                                        <rect key="frame" x="165" y="518" width="46" height="129"/>
+                                        <rect key="frame" x="164.5" y="517.5" width="46" height="129.5"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="showDrawer:" destination="0zf-Vi-MCG" eventType="touchUpInside" id="RdO-ve-8Ef"/>
@@ -315,35 +311,35 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsL-Ep-a3V">
-                                        <rect key="frame" x="165" y="0.0" width="46" height="129"/>
+                                        <rect key="frame" x="164.5" y="0.0" width="46" height="129.5"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="testOneAction:" destination="tpI-80-Abn" eventType="touchUpInside" id="MKV-FT-eLz"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBz-se-FK2">
-                                        <rect key="frame" x="165" y="129" width="46" height="130"/>
+                                        <rect key="frame" x="164.5" y="129.5" width="46" height="129.5"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="testTwoAction:" destination="tpI-80-Abn" eventType="touchUpInside" id="a65-nv-euk"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amZ-DG-j3b">
-                                        <rect key="frame" x="165" y="259" width="46" height="129"/>
+                                        <rect key="frame" x="164.5" y="259" width="46" height="129"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="testThreeAction:" destination="tpI-80-Abn" eventType="touchUpInside" id="SUZ-j0-ae0"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeZ-2z-EUZ">
-                                        <rect key="frame" x="165" y="388" width="46" height="130"/>
+                                        <rect key="frame" x="164.5" y="388" width="46" height="129.5"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="showDebugAction:" destination="tpI-80-Abn" eventType="touchUpInside" id="Z80-fv-kqo"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCV-0h-50S">
-                                        <rect key="frame" x="165" y="518" width="46" height="129"/>
+                                        <rect key="frame" x="164.5" y="517.5" width="46" height="129.5"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="showDrawer:" destination="tpI-80-Abn" eventType="touchUpInside" id="y1n-BA-wkH"/>
@@ -381,14 +377,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6PO-AG-zo8">
-                                        <rect key="frame" x="144" y="0.0" width="87" height="133"/>
+                                        <rect key="frame" x="144" y="0.0" width="87" height="133.5"/>
                                         <state key="normal" title="Test action 1"/>
                                         <connections>
                                             <action selector="testOneAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="W8c-cJ-1gW"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEm-UJ-xi6">
-                                        <rect key="frame" x="143" y="133" width="89" height="134"/>
+                                        <rect key="frame" x="143" y="133.5" width="89" height="133.5"/>
                                         <state key="normal" title="Test action 2"/>
                                         <connections>
                                             <action selector="testTwoAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="UPK-RU-9zg"/>
@@ -402,14 +398,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igj-4G-evu">
-                                        <rect key="frame" x="145" y="400" width="86" height="134"/>
+                                        <rect key="frame" x="144.5" y="400" width="86" height="133.5"/>
                                         <state key="normal" title="Show debug"/>
                                         <connections>
                                             <action selector="showDebugAction:" destination="2RM-Fi-koS" eventType="touchUpInside" id="YMA-bU-OZf"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZY-rb-qu1">
-                                        <rect key="frame" x="143" y="534" width="89" height="133"/>
+                                        <rect key="frame" x="143" y="533.5" width="89" height="133.5"/>
                                         <state key="normal" title="Show drawer"/>
                                         <connections>
                                             <action selector="showDrawer:" destination="2RM-Fi-koS" eventType="touchUpInside" id="K9h-ZR-tmo"/>

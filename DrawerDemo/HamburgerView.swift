@@ -8,6 +8,10 @@
 
 import UIKit
 
+/// `HamburgerView` draws hamburger and close icons at any scale. Supports
+/// animating and interactiver transition from one to another.
+/// NOTE: Curently underdeveloped only implement features necessary for 
+/// use with `DrawerController`
 class HamburgerView: UIView, CAAnimationDelegate {
     
     enum Mode {
@@ -15,6 +19,16 @@ class HamburgerView: UIView, CAAnimationDelegate {
         case close
     }
     
+    /// Returns mode based on current UI state
+    var mode: Mode {
+        return mid.strokeEnd == strkEnd(.hamburger) ? .hamburger : .close
+    }
+    
+    /// Used for interctive transition between modes. Automatical switches to 
+    /// oposite mode when value is set. ie if its in `.hamberger` transitions to
+    /// `.close`. Accepts values from 0 to 1.
+    /// - NOTE: After interactive transition animateTo(_:) should be called
+    /// with desired end state.
     var progress: CGFloat = 0 {
         didSet {
             update(to: progress)
@@ -27,20 +41,33 @@ class HamburgerView: UIView, CAAnimationDelegate {
         }
     }
     
+    /// Animates to given `mode`.
     func animateTo(_ mode: HamburgerView.Mode) {
+        // Create animations
         let strokeStart = CABasicAnimation(Key.strokeStart, toVal: strkStart(mode), duration: 0.5)
-        strokeStart.timingFunction = CAMediaTimingFunction(controlPoints: 0.25, -0.4, 0.5, 1)
-        let strokeEnd = CABasicAnimation(Key.strokeEnd, toVal: strkEnd(mode), duration: 0.6)
-        strokeEnd.timingFunction = CAMediaTimingFunction(controlPoints: 0.25, -0.4, 0.5, 1)
+        let strokeEnd   = CABasicAnimation(Key.strokeEnd, toVal: strkEnd(mode), duration: 0.6)
+        strokeStart.timingFunction = Consts.strokeTiming
+        strokeEnd.timingFunction   = Consts.strokeTiming
+        let topTransform = CABasicAnimation(Key.transform, toVal: transform(mode), duration: 0.4)
+        topTransform.timingFunction = Consts.lineTiming
+        topTransform.fillMode = kCAFillModeBackwards
+        let btmTransform = topTransform.copy(withToValue: transform(mode, top: false))
+        // If speed is 0 that means animating after interactive progress transition
+        // In that case animation from curent presentation layer value
         if mid.speed == 0 {
             strokeStart.fromValue = mid.presentation()?.value(forKeyPath: Key.strokeStart)
             strokeEnd.fromValue = mid.presentation()?.value(forKeyPath: Key.strokeEnd)
-            mid.speed = 1
-            mid.timeOffset = mid.beginTime + Date().timeIntervalSince1970
+            topTransform.fromValue = top.presentation()?.value(forKeyPath: Key.transform)
+            btmTransform.fromValue = btm.presentation()?.value(forKeyPath: Key.transform)
+            allShapeLayers().forEach {
+                $0.timeOffset = $0.beginTime + Date().timeIntervalSince1970
+                $0.speed = 1
+            }
         }
-        mid.removeAllAnimations()
-        mid.applyAnimation(strokeStart)
-        mid.applyAnimation(strokeEnd)
+        allShapeLayers().forEach { $0.removeAllAnimations() }
+        [strokeStart, strokeEnd].forEach { mid.applyAnimation($0) }
+        top.applyAnimation(topTransform)
+        btm.applyAnimation(btmTransform)
     }
     
     override func layoutSubviews() {
@@ -54,6 +81,7 @@ class HamburgerView: UIView, CAAnimationDelegate {
     private struct Key {
         static var strokeStart = "strokeStart"
         static var strokeEnd = "strokeEnd"
+        static var transform = "transform"
     }
     
     private struct Consts {
@@ -61,6 +89,9 @@ class HamburgerView: UIView, CAAnimationDelegate {
         static var closeStrokeStart: CGFloat = 0.325
         static var hamburgerStrokeEnd: CGFloat = 0.111
         static var closeStrokeEnd: CGFloat = 0.91
+        static var translationRatio: CGFloat = -0.076923
+        static var strokeTiming = CAMediaTimingFunction(controlPoints: 0.25, -0.4, 0.5, 1)
+        static var lineTiming = CAMediaTimingFunction(controlPoints: 0.5, -0.8, 0.5, 1.85)
     }
     
     private lazy var top = CAShapeLayer()
@@ -75,27 +106,35 @@ class HamburgerView: UIView, CAAnimationDelegate {
             return
         }
         initialSetupNeeded = false
-        //top.anchorPoint = CGPoint(x: 1, y: 0.5)
         allShapeLayers().forEach {
             self.layer.addSublayer($0)
             self.applyDefaults(to: $0)
+        }
+        allLineLayers().forEach {
+            $0.anchorPoint = CGPoint(x: 1, y: 0.5)
         }
         mid.strokeStart = strkStart(progress == 0 ? .hamburger : .close)
         mid.strokeEnd = strkEnd(progress == 0 ? .hamburger : .close)
     }
     
-    private func allShapeLayers() -> [CAShapeLayer] {
-        return [mid, top, btm]
-    }
-    
+    /// If there is not animation present, creates animation and sets layers
+    /// `speed` to 0. Then manipulates `timeOffSet` to update presentation layer
     private func update(to progress: CGFloat) {
         if mid.animationKeys()?.count ?? 0 == 0 {
-            mid.timeOffset = 0
+            allShapeLayers().forEach { $0.timeOffset = 0 }
             mid.strokeEnd == strkEnd(.hamburger) ? animateTo(.close) : animateTo(.hamburger)
-            mid.speed = 0
+            allShapeLayers().forEach { $0.speed = 0 }
         } else if mid.speed == 0 {
-            mid.timeOffset = CFTimeInterval(progress * 0.6)
+            allShapeLayers().forEach { $0.timeOffset = $0.beginTime + CFTimeInterval(progress * 0.6) }
         }
+    }
+    
+    private func transform(_ mode: Mode, top: Bool = true) -> NSValue {
+        let transX = Consts.translationRatio * bounds.width
+        let angle = CGFloat.pi / 4
+        let translation = CATransform3DMakeTranslation(transX, 0, 0)
+        let rotation = CATransform3DRotate(translation, angle, 0, 0, top ? -1 : 1)
+        return NSValue(caTransform3D: mode == .close ? rotation : CATransform3DIdentity )
     }
     
     private func strkStart(_ mode: Mode) -> CGFloat {
@@ -106,6 +145,9 @@ class HamburgerView: UIView, CAAnimationDelegate {
         return mode == .hamburger ? Consts.hamburgerStrokeEnd : Consts.closeStrokeEnd
     }
     
+    /// I appologies to anyone who has to look at this code let alone edit it
+    /// It super messy. What it achieves is button is correctly drawn relatively
+    /// bounds at any bouns.
     private func layoutShapeLayers() {
         padding = 0.05 * bounds.width
         let frame = self.bounds.insetBy(dx: padding, dy: padding)
@@ -150,17 +192,17 @@ class HamburgerView: UIView, CAAnimationDelegate {
         // Cumpute line path
         let lineLength = 0.4815 * w
         let topLineY = 0.3333333333 * h
-        let lineBounds = CGRect(origin: .zero, size: CGSize(width: lineLength + lineWidth * 2, height: lineWidth))
+        let lineBounds = CGRect(origin: .zero, size: CGSize(width: lineLength + (0 * 2), height: lineWidth))
         let linePath = CGMutablePath()
-        linePath.move(to: CGPoint(x: lineWidth, y: lineBounds.midY))
-        linePath.addLine(to: CGPoint(x: lineLength + lineWidth, y: lineBounds.midY))
+        linePath.move(to: CGPoint(x: 0, y: lineBounds.midY))
+        linePath.addLine(to: CGPoint(x: lineLength + 0, y: lineBounds.midY))
         // Top layer
         top.bounds = lineBounds
-        top.position = CGPoint(x: frame.midX, y: frame.minY + topLineY)
+        top.position = CGPoint(x: frame.midX + (lineLength * 0.5) + 0, y: frame.minY + topLineY)
         top.path = linePath
         // Bottom layer
         btm.bounds = lineBounds
-        btm.position = CGPoint(x: frame.midX, y: frame.maxY - topLineY)
+        btm.position = CGPoint(x: frame.midX + (lineLength * 0.5) + 0, y: frame.maxY - topLineY)
         btm.path = linePath
     }
     
@@ -168,6 +210,14 @@ class HamburgerView: UIView, CAAnimationDelegate {
         allShapeLayers().forEach {
             $0.strokeColor = tintColor.cgColor
         }
+    }
+    
+    private func allShapeLayers() -> [CAShapeLayer] {
+        return [mid, top, btm]
+    }
+    
+    private func allLineLayers() -> [CAShapeLayer] {
+        return [top, btm]
     }
     
     private func applyDefaults(to layer: CAShapeLayer) {
@@ -180,6 +230,8 @@ class HamburgerView: UIView, CAAnimationDelegate {
                          "transform": NSNull()]
     }
 }
+
+// MARK: - CALayer extensions
 
 extension CALayer {
     
@@ -196,6 +248,8 @@ extension CALayer {
     }
 }
 
+// MARK: - CABasicAnimation extensions
+
 extension CABasicAnimation {
     
     convenience init(_ keyPath: String, toVal: Any?, duration: TimeInterval) {
@@ -203,5 +257,11 @@ extension CABasicAnimation {
         self.toValue = toVal
         self.duration = duration
         self.isRemovedOnCompletion = true
+    }
+    
+    func copy(withToValue val: Any?) -> CABasicAnimation {
+        let anim = self.copy() as! CABasicAnimation
+        anim.toValue = val
+        return anim
     }
 }

@@ -24,11 +24,9 @@ class HamburgerViewController: UIViewController {
     }
     
     @IBAction func btnOneAction(_ sender: Any) {
-        btnOne.showsMenu = !btnOne.showsMenu
     }
     
     @IBAction func btnTwoAction(_ sender: Any) {
-        btnTwo.showsMenu = !btnTwo.showsMenu
     }
     
     

@@ -9,7 +9,7 @@
 import UIKit
 
 class TestDrawerViewController: UIViewController, DrawerControllerDelegate {
-
+    
     @IBOutlet weak var hamburgerButton: HamburgerButton!
     
     override func viewDidLoad() {
@@ -54,12 +54,14 @@ class TestDrawerViewController: UIViewController, DrawerControllerDelegate {
     
     func drawerControllerWillBeginInteractiveTransition(dc: DrawerController) { }
     
-    func drawerController(dc: DrawerController, didUpdateInteractiveTransition progress: CGFloat) {
-        hamburgerButton.transitionProgress = progress * 3
+    func drawerController(dc: DrawerController, didUpdateInteractiveTransition progress: CGFloat, presenting: Bool) {
+        hamburgerButton.transitionProgress = progress * ( presenting ? 2 : 3)
     }
     
-    func drawerController(dc: DrawerController, didEndInteractiveTransition success: Bool) {
-        hamburgerButton.animateTo(success ? .hamburger : .close)
+    func drawerController(dc: DrawerController, didEndInteractiveTransition success: Bool, presenting: Bool) {
+        if presenting == false {
+            hamburgerButton.animateTo(success ? .hamburger : .close)
+        }
     }
     
     @IBAction func panned(_ sender: UIPanGestureRecognizer) {

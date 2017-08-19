@@ -9,9 +9,9 @@
 import UIKit
 
 @objc protocol DrawerControllerDelegate: class {
-    @objc optional func drawerControllerWillBeginInteractiveTransition(dc: DrawerController)
-    @objc optional func drawerController(dc: DrawerController, didUpdateInteractiveTransition progress: CGFloat)
-    @objc optional func drawerController(dc: DrawerController, didEndInteractiveTransition success: Bool)
+    @objc optional func drawerControllerWillBeginInteractiveTransition(dc: DrawerController, presenting: Bool)
+    @objc optional func drawerController(dc: DrawerController, didUpdateInteractiveTransition progress: CGFloat, presenting: Bool)
+    @objc optional func drawerController(dc: DrawerController, didEndInteractiveTransition success: Bool, presenting: Bool)
 }
 
 /// `DrawerController` is container controller. Mimics conventions established 
@@ -57,16 +57,34 @@ class DrawerController: UIViewController {
     
     /// Replaces current `master` with `vc`
     override func show(_ vc: UIViewController, sender: Any?) {
-        // Remove current master
-        master?.willMove(toParentViewController: nil)
-        master?.view.removeFromSuperview()
-        master?.removeFromParentViewController()
-        // Add new master
-        self.addChildViewController(vc)
-        vc.view.frame = view.bounds
-        self.view.addSubview(vc.view)
-        vc.didMove(toParentViewController: self)
-        master = vc
+        // If there is no master just add it without animation
+        guard let currentMaster = master else {
+            addChildViewController(vc)
+            vc.view.frame = view.bounds
+            view.addSubview(vc.view)
+            vc.didMove(toParentViewController: self)
+            master = vc
+            return
+        }
+        // Animate transition
+        let animator = PrivateAnimator() as UIViewControllerAnimatedTransitioning
+        let transitionContext = PrivateTransitionContext(fromVC: currentMaster, toVC: vc)
+        transitionContext.completion = { didComplete in
+            if didComplete {
+                currentMaster.view.removeFromSuperview()
+                currentMaster.removeFromParentViewController()
+                vc.didMove(toParentViewController: self)
+                self.master = vc
+            } else {
+                currentMaster.didMove(toParentViewController: self)
+                vc.removeFromParentViewController()
+            }
+            animator.animationEnded?(didComplete)
+        }
+        currentMaster.willMove(toParentViewController: nil)
+        addChildViewController(vc)
+        animator.animateTransition(using: transitionContext)
+        
     }
     
     /// This method will show a view controller within the semantic "drawer" UI
@@ -131,13 +149,13 @@ class DrawerController: UIViewController {
 extension DrawerController {
     
     func prepareForInteractivePresentation() {
-        delegate?.drawerControllerWillBeginInteractiveTransition?(dc: self)
+        delegate?.drawerControllerWillBeginInteractiveTransition?(dc: self, presenting: true)
         let animator = DrawerAnimator(direction: .right, isPresentation: true)
         drawerTransitioningDelegate.interactiveTransitioning = animator
     }
     
     func handlePresentationPan(_ recognizer: UIPanGestureRecognizer) {
-        handleTransitionPan(recognizer, presentation: true)
+        handleTransitionPan(recognizer, presenting: true)
     }
     
     /// Set this as target of `UIPanGestureRecognizer` that should drive dismiss
@@ -146,32 +164,32 @@ extension DrawerController {
         handleTransitionPan(recognizer)
     }
     
-    private func handleTransitionPan(_ recognizer: UIPanGestureRecognizer, presentation: Bool = false) {
+    private func handleTransitionPan(_ recognizer: UIPanGestureRecognizer, presenting: Bool = false) {
         let transitioning = drawerTransitioningDelegate.interactiveTransitioning
         let view: UIView = transitioning?.latestContainerView ?? self.view
         let translation = recognizer.translation(in: view)
         var progress: CGFloat = (translation.x / (view.bounds.width * 2))
-        progress = min(max(presentation ? -progress : progress, 0.0), 1.0)
+        progress = min(max(presenting ? -progress : progress, 0.0), 1.0)
         switch recognizer.state {
         case .began:
             // Only setup for dismiss transition
-            if presentation == false {
-                delegate?.drawerControllerWillBeginInteractiveTransition?(dc: self)
+            if presenting == false {
+                delegate?.drawerControllerWillBeginInteractiveTransition?(dc: self, presenting: presenting)
                 let animator = DrawerAnimator(direction: .right, isPresentation: false)
                 drawerTransitioningDelegate.interactiveTransitioning = animator
                 dismiss(animated: true)
             }
         case .changed:
             transitioning?.update(progress)
-            delegate?.drawerController?(dc: self, didUpdateInteractiveTransition: progress)
+            delegate?.drawerController?(dc: self, didUpdateInteractiveTransition: progress, presenting: presenting)
         case .cancelled:
             transitioning?.cancel()
-            delegate?.drawerController?(dc: self, didEndInteractiveTransition: false)
+            delegate?.drawerController?(dc: self, didEndInteractiveTransition: false, presenting: presenting)
             drawerTransitioningDelegate.interactiveTransitioning = nil
         case .ended:
             let cancel = progress < 0.15
             cancel ? transitioning?.cancel() : transitioning?.finish()
-            delegate?.drawerController?(dc: self, didEndInteractiveTransition: !cancel)
+            delegate?.drawerController?(dc: self, didEndInteractiveTransition: !cancel, presenting: presenting)
             drawerTransitioningDelegate.interactiveTransitioning = nil
         default: ()
         }

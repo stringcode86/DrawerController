@@ -70,12 +70,12 @@ final class DrawerAnimator: UIPercentDrivenInteractiveTransition {
 extension DrawerAnimator: UIViewControllerAnimatedTransitioning {
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.4
+        return 0.5
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         self.latestContainerView = transitionContext.containerView
-        let key = isPresentation ? UITransitionContextViewControllerKey.to : UITransitionContextViewControllerKey.from
+        let key: UITransitionContextViewControllerKey = isPresentation ? .to : .from
         let controller = transitionContext.viewController(forKey: key)!
         if isPresentation {
             transitionContext.containerView.addSubview(controller.view)
@@ -142,5 +142,114 @@ extension DrawerAnimator {
         default: ()
         }
     }
-
 }
+
+
+// MARK: - PrivateAnimator 
+
+/// Private transitioning animator, designed to be only used for `DrawerController`
+/// `show(_:sender:)` transition.
+class PrivateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 0.6
+    }
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let fromVC = transitionContext.viewController(forKey: .from)!
+        let toVC = transitionContext.viewController(forKey: .to)!
+        let duration = transitionDuration(using: transitionContext)
+        let container = transitionContext.containerView
+        toVC.view.frame = transitionContext.initialFrame(for: toVC)
+        container.addSubview(toVC.view)
+        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.6, options: [], animations: {
+            fromVC.view.frame = transitionContext.finalFrame(for: fromVC)
+            toVC.view.frame = transitionContext.finalFrame(for: toVC)
+        }) { finished in
+            container.layer.sublayerTransform = CATransform3DIdentity
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        }
+        add3DTransformAnimation(fromVC, container: container, duration: duration)
+    }
+    
+    private func add3DTransformAnimation(_ toVC: UIViewController, container: UIView, duration: Double) {
+        let key = "transform"
+        container.layer.sublayerTransform = sublayerTransform()
+        let anim = CABasicAnimation(key, toVal: fromVCTransform(), duration: duration * 0.6)
+        anim.isRemovedOnCompletion = false
+        toVC.view.layer.add(anim, forKey: key)
+    }
+    
+    private func fromVCTransform() -> NSValue {
+        var transform = CATransform3DMakeRotation(CGFloat.pi / 8, 1, 0, 0)
+        transform = CATransform3DTranslate(transform, 0, -150, -150)
+        return NSValue(caTransform3D: transform)
+    }
+    
+    private func sublayerTransform() -> CATransform3D {
+        var sublayerTransform = CATransform3DIdentity
+        sublayerTransform.m34 = -1.0 / 1000
+        return sublayerTransform
+    }
+}
+
+
+// MARK: - PrivateTransitionContext
+
+/// Private transitioning context, designed to be only used for `DrawerController`
+/// `show(_:sender:)` transition.
+class PrivateTransitionContext: NSObject, UIViewControllerContextTransitioning {
+    let presentationStyle: UIModalPresentationStyle = .none
+    let targetTransform: CGAffineTransform = .identity
+    let isAnimated = true
+    let isInteractive = false
+    var transitionWasCancelled = false
+    var completion: ((_ didComplete: Bool)->())?
+    private(set) var containerView: UIView
+    private var fromVC: UIViewController
+    private var toVC: UIViewController
+    
+    init(fromVC: UIViewController, toVC: UIViewController) {
+        self.containerView = fromVC.view.superview!
+        self.fromVC = fromVC
+        self.toVC = toVC
+        super.init()
+    }
+    
+    func viewController(forKey key: UITransitionContextViewControllerKey) -> UIViewController? {
+        switch key {
+        case UITransitionContextViewControllerKey.from : return fromVC
+        case UITransitionContextViewControllerKey.to   : return toVC
+        default: return nil
+        }
+    }
+    
+    func view(forKey key: UITransitionContextViewKey) -> UIView? {
+        switch key {
+        case UITransitionContextViewKey.from : return fromVC.view
+        case UITransitionContextViewKey.to   : return toVC.view
+        default: return nil
+        }
+    }
+    
+    func initialFrame(for vc: UIViewController) -> CGRect {
+        var frame = fromVC.view.frame
+        frame.origin.y = containerView.bounds.maxY
+        return vc == fromVC ? fromVC.view.frame : frame
+    }
+    
+    func finalFrame(for vc: UIViewController) -> CGRect {
+        return containerView.bounds
+    }
+    
+    func completeTransition(_ didComplete: Bool) {
+        completion?(didComplete)
+    }
+
+    /// Silencing unsuported interactive transion methods
+    func updateInteractiveTransition(_ percentComplete: CGFloat) {}
+    func finishInteractiveTransition() {}
+    func cancelInteractiveTransition() {}
+    func pauseInteractiveTransition() {}
+}
+

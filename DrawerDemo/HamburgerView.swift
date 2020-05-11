@@ -224,7 +224,7 @@ import UIKit
     private func applyDefaults(to layer: CAShapeLayer) {
         layer.fillColor = UIColor.clear.cgColor
         layer.lineWidth = lineWidth
-        layer.lineCap = kCALineCapRound
+        layer.lineCap = CAShapeLayerLineCap.round
         layer.strokeColor = self.tintColor.cgColor
         layer.actions = ["strokeStart": NSNull(),
                          "strokeEnd": NSNull(),
@@ -269,7 +269,7 @@ extension CABasicAnimation {
         self.toValue = toVal
         self.duration = duration
         self.isRemovedOnCompletion = true
-        self.fillMode = kCAFillModeBoth
+        self.fillMode = CAMediaTimingFillMode.both
     }
     
     func copy(withToValue val: Any?) -> CABasicAnimation {

@@ -23,7 +23,7 @@ class GradientView: UIView {
     var colors: [UIColor] {
         get {
             let cgColors = (layer as? CAGradientLayer)?.colors as? [CGColor]
-            return cgColors?.flatMap { UIColor(cgColor: $0) } ?? []
+            return cgColors?.compactMap { UIColor(cgColor: $0) } ?? []
         }
         set {
             (layer as? CAGradientLayer)?.colors = newValue.map { $0.cgColor }

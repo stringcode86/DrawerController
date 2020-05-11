@@ -132,7 +132,10 @@ class DrawerPresentationController: UIPresentationController {
         let views = ["gradientView": gradientView, "view": presentedView]
         let constsH = NSLayoutConstraint.constraints("H:|-0-[gradientView]-0-[view]", views: views)
         let constsV = NSLayoutConstraint.constraints("V:|-0-[gradientView]-0-|", views: views)
-        self.containerView?.addConstraints(constsH + constsV)
+        containerView?.addConstraints(constsH + constsV)
+        containerView?.setNeedsLayout()
+        containerView?.layoutIfNeeded()
+        gradientView.frame = frameOfPresentedGradientViewInContainerView
     }
     
     /// Colors for more concentrated gradient

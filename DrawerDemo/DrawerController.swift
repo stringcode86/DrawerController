@@ -1,5 +1,5 @@
 //
-//  OTRSplitViewController.swift
+//  DrawerController.swift
 //  DrawerDemo
 //
 //  Created by Michael Inger on 15/08/2017.
@@ -59,10 +59,10 @@ class DrawerController: UIViewController {
     override func show(_ vc: UIViewController, sender: Any?) {
         // If there is no master just add it without animation
         guard let currentMaster = master else {
-            addChildViewController(vc)
+            addChild(vc)
             vc.view.frame = view.bounds
             view.addSubview(vc.view)
-            vc.didMove(toParentViewController: self)
+            vc.didMove(toParent: self)
             master = vc
             return
         }
@@ -72,17 +72,17 @@ class DrawerController: UIViewController {
         transitionContext.completion = { didComplete in
             if didComplete {
                 currentMaster.view.removeFromSuperview()
-                currentMaster.removeFromParentViewController()
-                vc.didMove(toParentViewController: self)
+                currentMaster.removeFromParent()
+                vc.didMove(toParent: self)
                 self.master = vc
             } else {
-                currentMaster.didMove(toParentViewController: self)
-                vc.removeFromParentViewController()
+                currentMaster.didMove(toParent: self)
+                vc.removeFromParent()
             }
             animator.animationEnded?(didComplete)
         }
-        currentMaster.willMove(toParentViewController: nil)
-        addChildViewController(vc)
+        currentMaster.willMove(toParent: nil)
+        addChild(vc)
         animator.animateTransition(using: transitionContext)
         
     }
@@ -160,7 +160,7 @@ extension DrawerController {
     
     /// Set this as target of `UIPanGestureRecognizer` that should drive dismiss
     /// interactive transitioning. Do not call dismiss, just add this as target.
-    func handleDismissPan(_ recognizer: UIPanGestureRecognizer) {
+    @objc func handleDismissPan(_ recognizer: UIPanGestureRecognizer) {
         handleTransitionPan(recognizer)
     }
     
@@ -228,7 +228,7 @@ extension UIViewController {
     /// calls `targetViewController(forAction:sender:)` first and redirects 
     /// accordingly if the return value is not `self`, otherwise it will present 
     /// the vc.
-    func showDrawerViewController(_ vc: UIViewController, sender: Any?) {
+    @objc func showDrawerViewController(_ vc: UIViewController, sender: Any?) {
         let selector = #selector(showDrawerViewController(_:sender:))
         let handler = targetViewController(forAction: selector, sender: sender)
         if let handler = handler, handler != self {

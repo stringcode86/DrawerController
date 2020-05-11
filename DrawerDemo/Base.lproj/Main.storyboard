@@ -370,7 +370,7 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Hec-dD-fP9" appends="YES" id="ISt-K0-CnJ"/>
-                                    <segue destination="Ufl-jM-EhD" kind="custom" identifier="showDrawer" customClass="ShowInDrawerSegue" customModule="DrawerDemo" customModuleProvider="target" id="c2U-vl-Ko0"/>
+                                    <segue destination="Ufl-jM-EhD" kind="custom" identifier="showDrawer" customClass="ShowInDrawerSegue" customModule="DrawerDemo" customModuleProvider="target" id="fH7-q5-mOU"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -412,6 +412,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="c2U-vl-Ko0"/>
+        <segue reference="fH7-q5-mOU"/>
     </inferredMetricsTieBreakers>
 </document>
